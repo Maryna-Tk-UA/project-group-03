@@ -1,8 +1,8 @@
 .footer {
+  width: 100%;
   background-color: #6b0609;
   margin: 0 auto;
   padding-bottom: 32px;
-  max-width: 375px;
 }
 
 .footer .container {
@@ -79,10 +79,6 @@
   opacity: 0.5;
 }
 
-.footer-socials-icon-current {
-  fill: #080c09;
-}
-
 /*.footer-nav-list-item a,
 .footer-socials-list-item a {
   color: #fff;
@@ -108,9 +104,6 @@
 }
 
 @media screen and (min-width: 768px) {
-  .footer {
-    max-width: 768px;
-  }
   .footer-nav-list {
     flex-direction: row;
   }
@@ -119,7 +112,6 @@
 @media screen and (min-width: 1440px) {
   .footer {
     padding-bottom: 0;
-    max-width: 1440px;
   }
 
   .footer .container {
