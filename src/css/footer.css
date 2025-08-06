@@ -83,6 +83,21 @@
   fill: #080c09;
 }
 
+/*.footer-nav-list-item a,
+.footer-socials-list-item a {
+  color: #fff;
+  text-decoration: none;
+  transition: opacity 0.3s ease;
+}
+
+.footer-nav-list-item a:hover,
+.footer-nav-list-item a:focus,
+.footer-socials-list-item a:hover,
+.footer-socials-list-item a:focus {
+  opacity: 0.5;
+  cursor: pointer;
+}*/
+
 .footer-text {
   width: 314.5px;
   font-weight: 400;
