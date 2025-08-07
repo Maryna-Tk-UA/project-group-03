@@ -1,40 +1,12 @@
-<!DOCTYPE html>
-<html lang="uk">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Наші меблі</title>
-    <link rel="stylesheet" href="styles.css" />
-  </head>
-  <body>
-    <section class="furniture-section">
-      <div class="container">
-        <h2 class="section-title">Наші меблі</h2>
-        <p class="section-subtitle">
-          Знайдіть ідеальні рішення для вашого інтер'єру
-        </p>
+<section class="furniture-section">
+  <div class="container">
+    <h1>Наші меблі</h1>
+    <div class="categories-list" id="categoriesList"></div>
 
-        <div class="filters" id="category-filters">
-          <button class="filter-btn active" data-category="all">
-            Всі товари
-          </button>
-        </div>
+    <div class="loader is-hidden">Завантаження...</div>
 
-        <ul class="furniture-list" id="furniture-list">
-          <!-- картки меблів -->
-        </ul>
+    <ul class="furniture-list"></ul>
 
-        <button id="load-more" class="load-more-btn">Показати ще</button>
-      </div>
-    </section>
-
-    <!-- модальне вікно -->
-    <div id="modal" class="modal hidden">
-      <div class="modal-content" id="modal-content"></div>
-      <button class="close-modal" id="close-modal">×</button>
-    </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="task.js"></script>
-  </body>
-</html>
+    <button id="load-more" class="load-more is-hidden">Завантажити ще</button>
+  </div>
+</section>
