@@ -14,8 +14,6 @@
   flex-direction: column;
   position: relative;
 }
-.header-navigation {
-}
 .burger-btn,
 .mobile-menu-button {
   padding: 0;
@@ -46,6 +44,7 @@
   gap: 32px;
   justify-content: center;
   align-items: center;
+  margin-bottom: 32px;
 }
 .button-link {
   display: block;
@@ -68,7 +67,7 @@
     /* position: sticky; */
     top: 0;
     z-index: 50;
-    box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+    
   }
   .header-navigation {
     align-self: flex-end;
@@ -83,6 +82,7 @@
     text-align: end;
     background-color: white;
     transition: transform 0.5s ease;
+    height: fit-content;
   }
   .header-menu-list {
     align-items: end;
@@ -97,7 +97,39 @@
   }
   .header-navigation {
     padding-right: 98px;
+    max-width: 298px;
   }
 }
 @media only screen and (min-width: 1440px) {
+  .header-logo{
+    width: 163px;
+height: 69px;
+  }
+  .header-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+   
+  }
+  .header-navigation {
+   position: static;
+    max-width: none;
+    padding-right: 0;
+    margin-bottom: 13.93px;
+   
+  }
+  .header-menu{
+ display: flex;
+ flex-direction: row;
+ align-items: center;
+ justify-content: center;
+  }
+  .header-menu-list {
+    flex-direction: row;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 160%;
+    margin: 0 32px 0 32px;
+  }
 }
