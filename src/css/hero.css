@@ -1,20 +1,19 @@
 /* mobile */
 
 .hero {
-    background-image: url("../img/hero/bg-mob.jpg");
+    background-image: image-set(
+        url("../img/hero/bg-mob.jpg") 1x,
+        url("../img/hero/bg@2x-mob.jpg") 2x);
     background-size: cover;
     background-position: center;
 }
 
+
 .hero-container {
-    padding-top: 156.5px;
-    padding-bottom: 157.5px;
-    padding-left: 19.5px;
-    padding-right: 20.5px;
+    padding: 157px 20px;
 }
 
 .hero-title {
-    font-family: "Raleway", sans-serif;
     font-weight: 700;
     font-size: 40px;
     line-height: 1.2;
@@ -24,20 +23,18 @@
     margin-bottom: 24px;
 }
 
-.hero-subtitle {
-    font-family: "Raleway", sans-serif;
-    font-weight: 400;
-    font-size: 16px;        
+.hero-subtitle {    
     line-height: 1.6;
     color: #fff;
 
     margin-bottom: 32px;
+
+    max-width: 335px;
 }
 
 .hero-button {
     display: inline-block;
 
-    font-family: "Raleway", sans-serif;
     font-weight: 500;
     font-size: 16px;
     line-height: 1.6;
@@ -58,20 +55,24 @@
     
 }
 
+.hero-button:hover,
+.hero-button:focus {
+    opacity: 0.5;
+}
+
 /* tablet */
 
 @media (min-width: 768px) {
     .hero {
-        background-image: url("../img/hero/bg-tab.jpg");
+        background-image: image-set(
+            url("../img/hero/bg-tab.jpg") 1x, 
+            url("../img/hero/bg@2x-tab.jpg") 2x);
         background-size: cover;
         background-position: center;
     }
 
     .hero-container {
-        padding-top: 36px;
-        padding-bottom: 37px;
-        padding-left: 31.5px;
-        padding-right: 32.5px;
+        padding: 37px 32px;
     }
 
     .hero-title {
@@ -80,6 +81,12 @@
 
     .hero-subtitle {
         font-size: 18px;
+        max-width: 560px;
+    }
+
+    .hero-button {
+        width: 209px;
+        height: 46px;
     }
 }
 
@@ -87,15 +94,14 @@
 
 @media (min-width: 1200px) {
     .hero {
-        background-image: url("../img/hero/bg-desc.jpg");
+        background-image: image-set(
+            url("../img/hero/bg-desc.jpg") 1x,
+            url("../img/hero/bg@2x-desc.jpg") 2x);
         background-size: cover;
         background-position: center;
     }
 
     .hero-container {
-        padding-top: 92px;
-        padding-bottom: 92px;
-        padding-left: 63px;
-        padding-right: 65px;
+        padding: 92px 64px;
     }
 }
