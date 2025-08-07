@@ -22,10 +22,14 @@ burgerBtn.addEventListener('click', ()=>{
 burgerBtn.classList.add('is-hidden');
 headerMenu.classList.remove('is-hidden');
 closeBtn.classList.remove('is-hidden');
+if (window.innerWidth < 768) {
+    document.body.classList.add('no-scroll');
+  }
 });
 closeBtn.addEventListener('click',()=>{
 burgerBtn.classList.remove('is-hidden');
 headerMenu.classList.add('is-hidden');
 closeBtn.classList.add('is-hidden');
 });
+
 
