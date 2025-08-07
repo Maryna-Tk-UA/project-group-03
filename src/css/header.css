@@ -56,10 +56,13 @@
   background-color: #6b0609;
   color: white;
   box-shadow: 0 1px 2px 0 var(--opacity-neutral-darkest-5),
-    inset 0 -2px 1px 0 rgba(0, 0, 0, 0.2),
+    inset 0 -2px 1px 0 rgba(0, 0, 0, 0.6),
     inset 0 0 0 1px var(--opacity-neutral-darkest-15),
     inset 0 2px 1px 0 rgba(255, 255, 255, 0.25),
     inset 0 32px 24px 0 var(--opacity-white-5);
+}
+.button-link:hover, .button-link:focus{
+    background-color: rgba(107, 6, 9, 0.4);
 }
 @media only screen and (min-width: 768px) {
   .header {
