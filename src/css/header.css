@@ -62,7 +62,7 @@
     inset 0 32px 24px 0 var(--opacity-white-5);
 }
 .button-link:hover, .button-link:focus{
-    background-color: rgba(107, 6, 9, 0.4);
+    background-color: rgba(107, 6, 9, 0.2);
 }
 @media only screen and (min-width: 768px) {
   .header {
