@@ -1,0 +1,127 @@
+.backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(36, 36, 36, 0.32);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* opacity: 0;
+    visibility: hidden; */
+    pointer-events: none;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    z-index: 1000;
+}
+
+.backdrop.is-open {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+.modal {
+    position: relative;
+    width: 600px;
+    max-width: 90vw;
+    min-height: 480px;
+    padding: 48px 40px 40px 40px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 32px rgba(36, 36, 36, 0.15);
+    transform: scale(0.97);
+    transition: transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.backdrop.is-open .modal {
+    transform: scale(1);
+}
+
+.modal-close-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+.modal-close-btn-icon {
+    width: 24px;
+    height: 24px;
+    stroke: #242424;
+}
+
+.modal-title {
+    font-family: inherit;
+    font-weight: 700;
+    font-size: 44px;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    text-align: center;
+    color: #242424;
+    margin-bottom: 32px;
+}
+
+/* Form styles for modal */
+.modal-form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.modal-label {
+    font-size: 16px;
+    font-weight: 500;
+    color: #242424;
+    margin-bottom: 6px;
+}
+
+.modal-input,
+.modal-textarea {
+    width: 100%;
+    padding: 12px 18px;
+    background: #f4f5f4;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    color: #242424;
+    outline: none;
+    margin-bottom: 0;
+    resize: none;
+}
+
+.modal-input:focus,
+.modal-textarea:focus {
+    box-shadow: 0 0 0 2px #a62b26;
+}
+
+.modal-textarea {
+    min-height: 120px;
+    max-height: 200px;
+}
+
+.modal-submit-btn {
+    margin: 32px auto 0 auto;
+    display: block;
+    padding: 10px 36px;
+    background: #7c1813;
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.modal-submit-btn:hover,
+.modal-submit-btn:focus {
+    background: #a62b26;
+}
