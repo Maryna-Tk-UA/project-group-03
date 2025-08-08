@@ -55,7 +55,6 @@ function openProductModal(product) {
   form.addEventListener("submit", e => {
     e.preventDefault();
 
-    // Внимание: ты писал checkedColor, а объявил choosenColor — нужно одинаково!
     const checkedColor = form.querySelector('input[name="color"]:checked');
     if (!checkedColor) {
       alert("Виберіть колір!");

@@ -132,7 +132,7 @@ background-color:rgba(0, 0, 0, 0.25);;
 
 .color-list-item.selected {
     outline: 2px solid #c7aa80;
-    /* пример акцента */
+    
     border-radius: 50%;
     box-shadow: 0 0 5px 2px #c7aa80;
 }
