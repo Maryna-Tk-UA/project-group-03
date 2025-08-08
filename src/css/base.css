@@ -30,4 +30,9 @@ main:has(.back-link) {
   text-align: center;
 }
 
+/* Додає плавну прокрутку */
+html {
+  scroll-behavior: smooth;
+}
+
 
