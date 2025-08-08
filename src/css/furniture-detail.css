@@ -19,15 +19,16 @@ background-color:rgba(0, 0, 0, 0.25);;
     pointer-events: auto;
 }
 
-.n0-scroll{
+.no-scroll{
     overflow: hidden;
+    height: 100%;
 }
 .furniture-detail-modal{
     border-radius: 8px;
-        padding: 64px 20px;
+        padding: 64px 20px 44px 20px;
         width: 335px;
-        height: 1155px;
-        background-color: blue;
+        outline: none;
+        background-color: #fff;
             position: absolute;
                 top: 50%;
                 left: 50%;
@@ -46,6 +47,7 @@ background-color:rgba(0, 0, 0, 0.25);;
 .modal-content{
     display: flex;
         flex-direction: column;
+        outline: none;
 }
 .images{
     display: flex;
@@ -73,6 +75,7 @@ background-color:rgba(0, 0, 0, 0.25);;
 .small-images-list{
     display: flex;
     gap: 16px;
+    margin-bottom: 24px;
 }
 
 .small-images-list-item{
@@ -81,6 +84,11 @@ background-color:rgba(0, 0, 0, 0.25);;
         height: 197px;
 }
 
+
+.thumb{
+    object-fit: cover;
+    height: 100%;
+}
 .color-list-item label {
     display: inline-block;
     width: 32px;
@@ -118,7 +126,7 @@ background-color:rgba(0, 0, 0, 0.25);;
         margin-bottom: 24px;
 }
 .currency{
-    font-size: 14px;
+    font-size: 22px;
 }
 
 .rating{
@@ -158,6 +166,36 @@ background-color:rgba(0, 0, 0, 0.25);;
     align-items: center;
     margin-top: 24px;
 }
+
+.color-list-item input[type="checkbox"] {
+    /* ховаємо сам чекбокс */
+    opacity: 0;
+    position: absolute;
+    width: 0;
+    height: 0;
+    margin: 0;
+    padding: 0;
+    pointer-events: none;
+}
+
+.color-list-item label {
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 1px solid #c7aa80;
+    cursor: pointer;
+    box-sizing: border-box;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+/* При виборі чекбокса лейбл підсвічується */
+.color-list-item input[type="checkbox"]:checked+label {
+    border-color: #6b0609;
+    /* або інший колір обводки */
+    box-shadow: 0 0 8px 2px #6b0609;
+}
+
 @media only screen and (min-width: 768px){
     .furniture-detail-modal{
         width: 704px;
