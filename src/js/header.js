@@ -38,8 +38,9 @@ mobileMenuLinks.forEach(link => {
   link.addEventListener('click', () => {
     headerMenu.classList.add('is-hidden');
     closeBtn.classList.add('is-hidden');
-    burgerBtn.classList.remove('is-hidden');
     document.body.classList.remove('no-scroll');
+    if (window.innerWidth < 1440){
+    burgerBtn.classList.remove('is-hidden');}
   });
 });
 
@@ -57,3 +58,4 @@ if (!isClickInsideMenu && !isClickOnBurgerBtn && !isClickOnCloseBtn && !headerMe
     document.body.classList.remove('no-scroll');
   }
 });
+
