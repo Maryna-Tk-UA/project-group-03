@@ -1,6 +1,7 @@
 const headerMenu = document.querySelector('.header-menu');
 const burgerBtn = document.querySelector('.burger-btn')
 const closeBtn = document.querySelector('.mobile-menu-button');
+const mobileMenuLinks = document.querySelectorAll('.header-menu-link');
 
 function toggleMenuVisibility(e) {
   if (e.matches) {
@@ -32,4 +33,27 @@ headerMenu.classList.add('is-hidden');
 closeBtn.classList.add('is-hidden');
 });
 
+// close menu after lіnk click
+mobileMenuLinks.forEach(link => {
+  link.addEventListener('click', () => {
+    headerMenu.classList.add('is-hidden');
+    closeBtn.classList.add('is-hidden');
+    burgerBtn.classList.remove('is-hidden');
+    document.body.classList.remove('no-scroll');
+  });
+});
 
+//  Закриття при кліку на вільне місце
+
+document.addEventListener('click', (event) => {
+  const isClickInsideMenu = headerMenu.contains(event.target);
+  const isClickOnBurgerBtn = burgerBtn.contains(event.target);
+  const isClickOnCloseBtn = closeBtn.contains(event.target);
+
+if (!isClickInsideMenu && !isClickOnBurgerBtn && !isClickOnCloseBtn && !headerMenu.classList.contains('is-hidden')) {
+    headerMenu.classList.add('is-hidden');
+    burgerBtn.classList.remove('is-hidden');
+    closeBtn.classList.add('is-hidden');
+    document.body.classList.remove('no-scroll');
+  }
+});
