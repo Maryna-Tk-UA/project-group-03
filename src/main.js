@@ -1,1 +1,1 @@
-import './js/furnitures.js';
+// import './js/furnitures.js';
