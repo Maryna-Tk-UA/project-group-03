@@ -1,1 +1,3 @@
-import './js/feedback'
+import './js/feedback.js'
+import './js/furnitures.js';
+
