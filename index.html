@@ -16,7 +16,9 @@
       rel="stylesheet"
     />
     <script type="module" crossorigin src="/project-group-03/index.js"></script>
-    <link rel="stylesheet" crossorigin href="/project-group-03/assets/index-CmygAdpu.css">
+    <link rel="modulepreload" crossorigin href="/project-group-03/assets/vendor-s9u5-7p2.js">
+    <link rel="stylesheet" crossorigin href="/project-group-03/assets/vendor-BfMlxmOj.css">
+    <link rel="stylesheet" crossorigin href="/project-group-03/assets/index-Q6uFIw4u.css">
   </head>
   <body>
     <h2>Header</h2>
@@ -30,7 +32,21 @@
         <a href="#feedback" class="hero-button">Що про нас думають</a>
     </div>
 </section>
-        <h2>Наші меблі</h2>
+        <section class="furniture-section">
+  <div class="container">
+    <h2 class="furniture-title">Наші меблі</h2>
+    <p class="text-subtitle">Знайдіть ідеальні рішення для вашого інтер'єру</p>
+
+    <ul class="categories-list" id="categoriesList"></ul>
+
+    <div class="loader is-hidden">Завантаження...</div>
+
+    <ul class="furniture-list"></ul>
+
+    <button id="load-more" class="load-more is-hidden">Показати ще</button>
+  </div>
+</section>
+
         <section id="section-about-us">
   <div class="container about-us-container">
 
