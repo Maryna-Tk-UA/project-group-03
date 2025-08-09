@@ -12,8 +12,10 @@ const base = import.meta.env.BASE_URL; // тільки для зображень
 const API_BASE = 'https://furniture-store.b.goit.study/api';
 const imgArr = [
   {
+fix-id
     src: `${base}img/Furniture-img/1_1x-min.png`,
     src2x: `${base}/img/Furniture-img/1_2x-min.png`,
+
     alt: 'Меблі від Меблерія',
   },
   {
