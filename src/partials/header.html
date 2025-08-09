@@ -1,1 +1,49 @@
-<h2>Header</h2>
+<header class="header">
+  <div class="container header-container">
+    <a
+      class="logo-link header-logo"
+      href="../index.html"
+      aria-label="Меблерія"
+      aria-hidden="true"
+    >
+      <svg class="logo" width="163" height="70">
+        <use href="../img/sprite.svg#icon-mebleriya"></use>
+      </svg>
+    </a>
+    <button class="burger-btn" type="button" data-menu-open>
+      <svg class="burger-icon" width="34" height="34">
+        <use href="../img/sprite.svg#icon-menu"></use>
+      </svg>
+    </button>
+    <button class="mobile-menu-button is-hidden" type="button" data-menu-close>
+      <svg
+        class="mobile-cross-btn"
+        aria-label="кнопка закриття"
+        width="34"
+        height="34"
+      >
+        <use href="../img/sprite.svg#icon-x"></use>
+      </svg>
+    </button>
+    <nav class="header-navigation">
+      <div class="header-menu is-hidden">
+        <ul class="header-menu-list">
+          <li class="header-menu-item">
+            <a href="#furniture" class="header-menu-link">Наші меблі</a>
+          </li>
+          <li class="header-menu-item">
+            <a href="#about-us" class="header-menu-link">Про нас</a>
+          </li>
+          <li class="header-menu-item">
+            <a href="#faq" class="header-menu-link">Часті питання</a>
+          </li>
+          <li class="header-menu-item">
+            <a href="#feedback" class="header-menu-link">Відгуки</a>
+          </li>
+          </ul>
+        <a href="#furniture" class="header-menu-link button-link">До покупок</a>
+      </div>
+    </nav>
+  </div>
+  <script type="module" src="../js/header.js"></script>
+</header>
