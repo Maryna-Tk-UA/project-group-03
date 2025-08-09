@@ -53,6 +53,9 @@ export const imgArr = [
   { src: img23x, src2x: img24x, alt: 'Меблі від Меблерія' },
   { src: img25x, src2x: img26x, alt: 'Меблі від Меблерія' },
 ];
+
+// Працюй, падлюка!
+
 // --- Стан ---
 let categories = [];
 let currentCategoryId = '0'; // '0' - всі товари
