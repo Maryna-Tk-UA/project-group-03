@@ -13,67 +13,67 @@ const imgArr = [
 
     src: '/img/Furniture-img/1_1x-min.png',
     src2x: '/img/Furniture-img/1_2x-min.png',
-    alt: 'Опис зображення',
+    alt: 'Меблі від Меблерія',
   },
   {
     src: '/img/Furniture-img/2_1x-min.png',
     src2x: '/img/Furniture-img/2_2x-min.png',
-    alt: 'Опис зображення',
+    alt: 'Меблі від Меблерія',
   },
   {
     src: '/img/Furniture-img/3_1x-min.png',
     src2x: '/img/Furniture-img/3_2x-min.png',
-    alt: 'Опис зображення',
+    alt: 'Меблі від Меблерія',
   },
   {
     src: '/img/Furniture-img/4_1x-min.png',
     src2x: '/img/Furniture-img/4_2x-min.png',
-    alt: 'Опис зображення',
+    alt: 'Меблі від Меблерія',
   },
   {
     src: '/img/Furniture-img/5_1x-min.png',
     src2x: '/img/Furniture-img/5_2x-min.png',
-    alt: 'Опис зображення',
+    alt: 'Меблі від Меблерія',
   },
   {
     src: '/img/Furniture-img/6_1x-min.png',
     src2x: '/img/Furniture-img/6_2x-min.png',
-    alt: 'Опис зображення',
+    alt: 'Меблі від Меблерія',
   },
   {
     src: '/img/Furniture-img/7_1x-min.png',
     src2x: '/img/Furniture-img/7_2x-min.png',
-    alt: 'Опис зображення',
+    alt: 'Меблі від Меблерія',
   },
   {
     src: '/img/Furniture-img/8_1x-min.png',
     src2x: '/img/Furniture-img/8_2x-min.png',
-    alt: 'Опис зображення',
+    alt: 'Меблі від Меблерія',
   },
   {
     src: '/img/Furniture-img/9_1x-min.png',
     src2x: '/img/Furniture-img/9_2x-min.png',
-    alt: 'Опис зображення',
+    alt: 'Меблі від Меблерія',
   },
   {
     src: '/img/Furniture-img/10_1x-min.png',
     src2x: '/img/Furniture-img/10_2x-min.png',
-    alt: 'Опис зображення',
+    alt: 'Меблі від Меблерія',
   },
   {
     src: '/img/Furniture-img/11_1x-min.png',
     src2x: '/img/Furniture-img/11_2x-min.png',
-    alt: 'Опис зображення',
+    alt: 'Меблі від Меблерія',
   },
   {
     src: '/img/Furniture-img/12_1x-min.png',
     src2x: '/img/Furniture-img/12_2x-min.png',
-    alt: 'Опис зображення',
+    alt: 'Меблі від Меблерія',
   },
   {
     src: '/img/Furniture-img/13_1x-min.png',
     src2x: '/img/Furniture-img/13_2x-min.png',
-    alt: 'Опис зображення',
+    alt: 'Меблі від Меблерія',
   },
 ];
 // --- Стан ---
