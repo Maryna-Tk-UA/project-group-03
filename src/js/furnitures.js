@@ -7,12 +7,15 @@ const loader = document.querySelector('.loader');
 const categoriesList = document.getElementById('categoriesList');
 const loadMoreBtn = document.getElementById('load-more');
 
+const base = import.meta.env.BASE_URL; // тільки для зображень у imgArr
+
 const API_BASE = 'https://furniture-store.b.goit.study/api';
 const imgArr = [
   {
+fix-id
+    src: `${base}img/Furniture-img/1_1x-min.png`,
+    src2x: `${base}/img/Furniture-img/1_2x-min.png`,
 
-    src: '/img/Furniture-img/1_1x-min.png',
-    src2x: '/img/Furniture-img/1_2x-min.png',
     alt: 'Меблі від Меблерія',
   },
   {
