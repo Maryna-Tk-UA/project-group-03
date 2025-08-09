@@ -10,6 +10,7 @@ const loadMoreBtn = document.getElementById('load-more');
 const API_BASE = 'https://furniture-store.b.goit.study/api';
 const imgArr = [
   {
+
     src: '/img/Furniture-img/1_1x-min.png',
     src2x: '/img/Furniture-img/1_2x-min.png',
     alt: 'Опис зображення',
