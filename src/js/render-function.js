@@ -1,4 +1,4 @@
-import { state } from './furnitures'
+import { state } from './furnitures';
 
 const furnitureList = document.querySelector('.furniture-list');
 const categoriesList = document.getElementById('categoriesList');
@@ -6,26 +6,32 @@ const loadMoreBtn = document.getElementById('load-more');
 
 export function categoryItemTemplate({ _id, name }, img, active) {
   return `
-    <li class="category-item wrapper_category ${active ? 'active' : ''}" data-id="${_id}">
-      <img class="img_category" src="${img.src}" srcset="${img.src2x} 2x" alt="${name}" />
+    <li class="category-item wrapper_category ${
+      active ? 'active' : ''
+    }" data-id="${_id}">
+      <img class="img_category" src="${img.src}" srcset="${
+    img.src2x
+  } 2x" alt="${name}" />
       <p class="text_category">${name}</p>
     </li>
   `;
 }
 
 export function furnitureItemTemplate({ _id, name, price, images, color }) {
-  const colorsMarkup = Array.isArray(color) && color.length
-    ? color.map(c => {
-        const cleanId = c.replace(/[^a-zA-Z0-9]/g, '');
-        return `
+  const colorsMarkup =
+    Array.isArray(color) && color.length
+      ? color
+          .map(c => {
+            const cleanId = c.replace(/[^a-zA-Z0-9]/g, '');
+            return `
           <div class="color-checkbox">
             <input type="checkbox" id="color-${_id}-${cleanId}" value="${c}" />
             <label for="color-${_id}-${cleanId}" style="background-color: ${c};" title="${c}"></label>
           </div>
         `;
-      }).join('')
-    : '';
-
+          })
+          .join('')
+      : '';
 
   return `
     <li class="furniture-item" data-id="${_id}">
@@ -42,7 +48,6 @@ export function furnitureItemTemplate({ _id, name, price, images, color }) {
   `;
 }
 
-
 export function renderCategories(categories, imgArr, activeId) {
   const firstCategory = categoryItemTemplate(
     { _id: '0', name: 'Всі товари' },
@@ -50,9 +55,11 @@ export function renderCategories(categories, imgArr, activeId) {
     activeId === '0'
   );
 
-  const otherCategories = categories.map((cat, i) =>
-    categoryItemTemplate(cat, imgArr[i + 1], activeId === cat._id)
-  ).join('');
+  const otherCategories = categories
+    .map((cat, i) =>
+      categoryItemTemplate(cat, imgArr[i + 1], activeId === cat._id)
+    )
+    .join('');
 
   categoriesList.innerHTML = firstCategory + otherCategories;
 }
@@ -71,16 +78,16 @@ export function renderFurnitures(furnitures, append = false) {
 
 export function updateLoadMoreBtn() {
   const shouldHide = state.totalLoaded >= state.totalAvailable;
-  loadMoreBtn.classList.toggle('is-hidden', shouldHide);
+  loadMoreBtn.classList.toggle('btn-is-hidden', shouldHide);
   loadMoreBtn.disabled = shouldHide;
 }
 
 export function hideLoadMoreButton() {
-    loadMoreBtn.classList.add('btn-is-hidden');
-    loadMoreBtn.disabled = true;
+  loadMoreBtn.classList.add('btn-is-hidden');
+  loadMoreBtn.disabled = true;
 }
 
 export function showLoadMoreButton() {
-    loadMoreBtn.classList.remove('btn-is-hidden');
-    loadMoreBtn.disabled = false;
+  loadMoreBtn.classList.remove('btn-is-hidden');
+  loadMoreBtn.disabled = false;
 }
