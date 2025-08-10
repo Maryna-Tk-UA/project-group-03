@@ -1,9 +1,11 @@
+
+const loaderOverlay = document.getElementById("loaderOverlay");
+
 export function showLoader() {
-  const loader = document.querySelector('.loader');
-  loader.classList.remove('is-hidden');
+  loaderOverlay.classList.remove("visually-hidden");
 }
 
 export function hideLoader() {
-  const loader = document.querySelector('.loader');
-  loader.classList.add('is-hidden');
+  loaderOverlay.classList.add("visually-hidden");
 }
+
