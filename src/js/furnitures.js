@@ -121,7 +121,7 @@ async function fetchFurnitures({ category = '0', page = 2, limit = 8 } = {}) {
     if (category !== '0') params.category = category;
 
     const res = await axios.get(`${API_BASE}/furnitures`, { params });
-    console.log(res);
+   
 
     const furnitures = res.data.furnitures || [];
     const total = res.data.total || 0;
@@ -167,10 +167,12 @@ function renderFurnitureList(furnitures, append = false) {
 
       return `
         <li class="furniture-item" data-id="${_id}">
-          <img class="furniture-img" src="${images[0] || ''}" alt="${name}" />
+          <div class="furniture-img-wrap"><img class="furniture-img" src="${images[0] || ''}" alt="${name}" /></div>
+          <div class="furniture-text-wrap">
           <h3 class="furniture-subtitle">${name}</h3>
           <div class="color-checkboxes">${colorsMarkup}</div>
           <p class="furniture-text">${price} грн</p>
+          </div>
           <button class="furniture-btn" type="button" data-id="${_id}">Детальніше</button>
         </li>
       `;
