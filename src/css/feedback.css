@@ -299,3 +299,15 @@
 .swiper-pagination-bullet-active {
     background-color: #6b0609 !important;
 }
+.loader {
+    display: block;
+
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.is-hidden {
+    display: none;
+}

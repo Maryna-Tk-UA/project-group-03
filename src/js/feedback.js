@@ -1,5 +1,7 @@
 import axios from 'axios';
-
+import iziToast from 'izitoast';
+import 'izitoast/dist/css/iziToast.min.css';
+import { showLoader, hideLoader } from './loader';
 
 import Swiper from 'swiper';
 import { Navigation, Pagination } from 'swiper/modules';
@@ -11,20 +13,29 @@ import 'swiper/css/pagination';
 const postList = document.querySelector('#feedback-list');
 let swiperInstance = null;
 
+
 async function feedbackCards() {
+  
   try {
+    showLoader();
     const response = await axios.get('https://furniture-store.b.goit.study/api/feedbacks');
     const feedbacks = response.data.feedbacks;
 
     await renderFeedbacks(feedbacks);
     initSwiper();
+    hideLoader()
   } catch (error) {
-    console.error(error);
-    postList.innerHTML = "<div>Сталася помилка при завантаженні відгуків.</div>";
+     hideLoader()
+    iziToast.error({
+      title: 'Error',
+      message: 'Something went wrong. Please try again later.',
+      position: 'topRight',
+    });
   }
 }
 
 async function renderFeedbacks(feedbacks) {
+  
   const slides = feedbacks.map(({ name, descr, rate }) => {
     const simplifiedRate = simplifyValue(rate);
     const thumbs = Array.from({ length: 5 }, () => {
