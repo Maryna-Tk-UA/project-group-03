@@ -1,3 +1,6 @@
-import './js/feedback.js'
-import './js/furnitures.js';
+import "./js/header"
+import "./js/loader"
+import "./js/furnitures"
+import "./js/feedback"
+
 

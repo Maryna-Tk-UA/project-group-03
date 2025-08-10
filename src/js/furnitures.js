@@ -28,9 +28,9 @@ import img23x from '/img/Furniture-img/12_1x-min.png';
 import img24x from '/img/Furniture-img/12_2x-min.png';
 import img25x from '/img/Furniture-img/13_1x-min.png';
 import img26x from '/img/Furniture-img/13_2x-min.png';
+import { hideLoader, showLoader } from './loader';
 
 const furnitureList = document.querySelector('.furniture-list');
-const loader = document.querySelector('.loader');
 const categoriesList = document.getElementById('categoriesList');
 const loadMoreBtn = document.getElementById('load-more');
 
@@ -68,6 +68,7 @@ let totalAvailable = 0;
 
 // Отримання категорій
 async function fetchCategory() {
+  showLoader();
   try {
     const res = await axios.get(`${API_BASE}/categories`);
     return res.data;
@@ -77,6 +78,8 @@ async function fetchCategory() {
       position: 'topRight',
     });
     return [];
+  } finally {
+  hideLoader();
   }
 }
 
@@ -115,13 +118,13 @@ function createMarkupCategory(categories, arrImg, activeId) {
 
 // Завантаження меблів з пагінацією та фільтрацією
 async function fetchFurnitures({ category = '0', page = 2, limit = 8 } = {}) {
-  loader.classList.remove('is-hidden');
+  showLoader();
   try {
     const params = { page, limit };
     if (category !== '0') params.category = category;
 
     const res = await axios.get(`${API_BASE}/furnitures`, { params });
-    console.log(res);
+   
 
     const furnitures = res.data.furnitures || [];
     const total = res.data.total || 0;
@@ -134,7 +137,7 @@ async function fetchFurnitures({ category = '0', page = 2, limit = 8 } = {}) {
     });
     return { furnitures: [], total: 0 };
   } finally {
-    loader.classList.add('is-hidden');
+    hideLoader();
   }
 }
 
@@ -167,10 +170,12 @@ function renderFurnitureList(furnitures, append = false) {
 
       return `
         <li class="furniture-item" data-id="${_id}">
-          <img class="furniture-img" src="${images[0] || ''}" alt="${name}" />
+          <div class="furniture-img-wrap"><img class="furniture-img" src="${images[0] || ''}" alt="${name}" /></div>
+          <div class="furniture-text-wrap">
           <h3 class="furniture-subtitle">${name}</h3>
           <div class="color-checkboxes">${colorsMarkup}</div>
           <p class="furniture-text">${price} грн</p>
+          </div>
           <button class="furniture-btn" type="button" data-id="${_id}">Детальніше</button>
         </li>
       `;
