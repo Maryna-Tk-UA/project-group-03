@@ -2,7 +2,7 @@ import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
 import { imgArr } from './img-data.js'
 import { getCategories, getFurnitures } from './pixabay-api';
-import { renderCategories, renderFurnitures, updateLoadMoreBtn, } from './render-function';
+import { hideLoadMoreButton, renderCategories, renderFurnitures, showLoadMoreButton } from './render-function';
 
 const furnitureList = document.querySelector('.furniture-list');
 const categoriesList = document.getElementById('categoriesList');
@@ -60,7 +60,18 @@ async function loadFurnitures(append) {
   state.totalLoaded += furnitures.length;
 
   renderFurnitures(furnitures, append);
-  updateLoadMoreBtn();
+
+  if(state.totalLoaded >= state.totalAvailable) {
+    hideLoadMoreButton();
+    iziToast.info({
+      message: 'Більше немає товарів у цій категорії!',
+      position: 'topRight'
+        })
+    
+  } else {
+    showLoadMoreButton();
+    
+  }
 }
 
 async function init() {
