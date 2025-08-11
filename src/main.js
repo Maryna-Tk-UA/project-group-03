@@ -1,6 +1,7 @@
 import "./js/header"
 import "./js/loader"
-import "./js/furnitures"
+// import "./js/furnitures"
 import "./js/feedback"
+import "./js/furniture-detail"
 
 
