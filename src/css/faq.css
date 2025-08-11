@@ -1,5 +1,5 @@
 .faq {
-  margin: 48px 0;
+  padding: 48px 0;
 }
 
 .accordion-container {
@@ -39,13 +39,14 @@ div .ac:last-child {
   border: none;
 }
 
-.ac-text {
-  font-weight: 400;
+.ac .ac-panel .ac-text {
+  font-family: 'Raleway', sans-serif;
   font-size: 16px;
   line-height: 160%;
   color: #080c09;
-
-  padding: 0px 0px 24px 0px;
+  padding: 0 0 24px 0;
+  padding: 8px;
+  margin: 0;
 }
 
 .ac .ac-trigger {
