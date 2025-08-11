@@ -40,11 +40,12 @@ mobileMenuLinks.forEach(link => {
     closeBtn.classList.add('is-hidden');
     document.body.classList.remove('no-scroll');
     if (window.innerWidth < 1440){
-    burgerBtn.classList.remove('is-hidden');}
+    burgerBtn.classList.remove('is-hidden');
+    headerMenu.classList.add('is-hidden');}
   });
 });
 
-//  Закриття при кліку на вільне місце
+//  close menu after lіnk to free space
 
 document.addEventListener('click', (event) => {
   const isClickInsideMenu = headerMenu.contains(event.target);
