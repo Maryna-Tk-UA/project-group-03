@@ -12,13 +12,13 @@
   display: none;
 }
 
-.loader {
+.app-loader {
   width: 64px;
   height: 48px;
   position: relative;
   animation: split 1s ease-in infinite alternate;
 }
-.loader::before , .loader::after {
+.app-loader::before , .app-loader::after {
   content: '';
   position: absolute;
   height: 48px;
@@ -32,7 +32,7 @@
   backdrop-filter: blur(20px);
 }
 
-.loader::after {
+.app-loader::after {
   left: auto;
   right: 0;
   background: #FFF;
