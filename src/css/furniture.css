@@ -75,6 +75,12 @@
   font-weight: 600;
   line-height: 1.6;
   margin-bottom: 8px;
+    display: -webkit-box;
+  -webkit-line-clamp: 1;  /* лише 1 рядок */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis; /* додає ... */
+  white-space: normal; 
 }
 
 .color-checkboxes {
