@@ -29,7 +29,10 @@ categoriesList.addEventListener('click', e => {
 });
 
 loadMoreBtn.addEventListener('click', async () => {
-  if (state.totalLoaded >= state.totalAvailable) return;
+  if (state.totalLoaded >= state.totalAvailable) {
+    hideLoadMoreButton();
+    return;
+  }
   state.currentPage++;
   await loadFurnitures(true);
 });
@@ -75,7 +78,12 @@ async function loadFurnitures(append) {
   });
 
   state.totalAvailable = total;
-  state.totalLoaded += furnitures.length;
+
+  if (append) {
+    state.totalLoaded += furnitures.length;
+  } else {
+    state.totalLoaded = furnitures.length;
+  }
 
   renderFurnitures(furnitures, append);
 
