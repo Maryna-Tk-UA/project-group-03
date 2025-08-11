@@ -1,0 +1,300 @@
+.backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1), visibility 250ms cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 999;
+    background-color: rgba(0, 0, 0, 0.25);
+    ;
+
+}
+
+.is-open {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+.no-scroll {
+    overflow: hidden;
+    height: 100%;
+}
+
+.furniture-detail-modal {
+    border-radius: 8px;
+    padding: 64px 20px 44px 20px;
+    width: 335px;
+    outline: none;
+    background-color: #fff;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+    overflow-y: auto;
+    overflow-x: hidden
+}
+
+.close-btn {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    border-color: transparent;
+    background-color: transparent;
+}
+
+.modal-content {
+    display: flex;
+    flex-direction: column;
+    outline: none;
+}
+
+.images {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.descr {
+    display: flex;
+    flex-direction: column;
+}
+
+.main-image-wrapper {
+
+    width: 295px;
+    height: 297px;
+    margin-bottom: 16px;
+}
+
+
+.main-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.small-images-list {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.small-images-list-item {
+
+    width: 139px;
+    height: 197px;
+}
+
+
+.thumb {
+    object-fit: cover;
+    height: 100%;
+    border-radius: 8px;
+}
+
+.color {
+    margin-bottom: 8px;
+}
+
+.color-list-item label {
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 1px solid #c7aa80;
+    cursor: pointer;
+    box-sizing: border-box;
+}
+
+.furniture-name {
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 1.3;
+    letter-spacing: 0.01em;
+    color: #080c09;
+    margin-bottom: 8px;
+}
+
+.furniture-category-text {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.6;
+    color: #080c09;
+}
+
+.price {
+    display: flex;
+    align-items: flex-start;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 1.4;
+    letter-spacing: 0.01em;
+    margin-bottom: 24px;
+}
+
+.currency {
+    font-size: 22px;
+}
+
+.rating {
+    margin-bottom: 24px;
+}
+
+.color-list {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.color-list-item.selected {
+    outline: 2px solid #c7aa80;
+
+    border-radius: 50%;
+    box-shadow: 0 0 5px 2px #c7aa80;
+}
+
+.descr-text {
+    line-height: 1.6;
+    margin-bottom: 32px;
+
+}
+
+.product-size {
+    line-height: 1.6;
+
+}
+
+.form-btn {
+    border-radius: 100px;
+    padding: 10px 24px;
+    width: 310px;
+    height: 46px;
+    box-shadow: 0 1px 2px 0 rgba(8, 12, 9, 0.05), inset 0 -2px 1px 0 rgba(0, 0, 0, 0.2), inset 0 0 0 1px rgba(8, 12, 9, 0.15), inset 0 2px 1px 0 rgba(255, 255, 255, 0.25), inset 0 32px 24px 0 rgba(255, 255, 255, 0.05);
+    background: #6b0609;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 24px;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1.6;
+    color: #fff;
+    border-color: transparent;
+    transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.form-btn:hover,
+.form-btn:focus {
+    box-shadow: 0 1px 2px 0 rgba(8, 12, 9, 0.05), inset 0 -2px 1px 0 rgba(0, 0, 0, 0.2), inset 0 0 0 1px rgba(8, 12, 9, 0.15), inset 0 2px 1px 0 rgba(255, 255, 255, 0.25), inset 0 32px 24px 0 rgba(255, 255, 255, 0.05);
+    background-color: #6b0609;
+    opacity: 0.5;
+    color: #fff;
+}
+
+.color-list-item input[type="checkbox"] {
+    /* ховаємо сам чекбокс */
+    opacity: 0;
+    position: absolute;
+    width: 0;
+    height: 0;
+    margin: 0;
+    padding: 0;
+    pointer-events: none;
+}
+
+.color-list-item label {
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 1px solid #c7aa80;
+    cursor: pointer;
+    box-sizing: border-box;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+/* При виборі чекбокса лейбл підсвічується */
+.color-list-item input[type="checkbox"]:checked+label {
+    border-color: #6b0609;
+    /* або інший колір обводки */
+    box-shadow: 0 0 8px 2px #6b0609;
+}
+
+@media only screen and (min-width: 768px) {
+    .furniture-detail-modal {
+        width: 704px;
+
+        padding: 64px 32px 75px 32px;
+    }
+
+    .main-image-wrapper {
+        width: 640px;
+        height: 297px;
+    }
+
+    .main-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .small-images-list-item {
+
+        width: 312px;
+        height: 197px;
+    }
+
+    .thumb {
+        width: 100%;
+    }
+
+    .furniture-name {
+
+        font-size: 40px;
+
+        margin-bottom: 8px;
+
+    }
+
+    .price {
+        font-size: 32px;
+    }
+
+    .descr-text {
+        width: 421px;
+
+    }
+}
+
+@media only screen and (min-width: 1440px) {
+    .furniture-detail-modal {
+        padding: 64px;
+        width: 1090px;
+        height: 649px;
+    }
+
+    .modal-content {
+        display: flex;
+        flex-direction: row;
+        gap: 24px;
+    }
+
+    .main-image-wrapper {
+        width: 580px;
+        height: 308px;
+    }
+
+    .small-images-list-item {
+
+        width: 282px;
+        height: 197px;
+    }
+
+}
