@@ -141,13 +141,12 @@
   background-color: rgba(8, 12, 9, 0.05);
   font-weight: 500;
   line-height: 1.6;
-  transition: opacity 500ms ease, transform 500ms ease;
+  transition: opacity 500ms ease;
 }
 
 .furniture-btn:hover,
 .load-more:hover {
  opacity: 0.5;
- transform: scale(0.95);
 }
 
 .load-more {
