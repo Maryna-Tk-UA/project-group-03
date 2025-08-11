@@ -1,1 +1,136 @@
+.footer {
+  width: 100%;
+  background-color: #6b0609;
+  margin: 0 auto;
+  padding-bottom: 25.22px;
+  padding-top: 32px;
+}
 
+.footer .container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.footer-logo {
+
+  fill: #fff;
+  margin-bottom: 40px;
+}
+
+.footer-list-container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  justify-content: center;
+  align-items: center;
+}
+
+.footer-wrap-container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  justify-content: center;
+  align-items: center;
+}
+
+.footer-nav-list {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  align-items: center;
+}
+
+.footer-nav-list-item {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #fff;
+  opacity: 1;
+  transition: opacity 0.8s ease 0s;
+}
+
+.footer-nav-list-item:hover,
+.footer-nav-list-item:focus {
+  opacity: 0.5;
+}
+
+.footer-socials-icon {
+  fill: #fff;
+}
+
+.icon-current {
+  fill: black;
+}
+
+.footer-socials-list {
+  display: flex;
+  gap: 24px;
+}
+
+.footer-socials-list-item {
+  width: 24px;
+  height: 24px;
+  opacity: 1;
+  transition: opacity 0.8s ease 0s;
+}
+
+.footer-socials-list-item:hover,
+.footer-socials-list-item:focus {
+  opacity: 0.5;
+}
+
+/*.footer-nav-list-item a,
+.footer-socials-list-item a {
+  color: #fff;
+  text-decoration: none;
+  transition: opacity 0.3s ease;
+}
+
+.footer-nav-list-item a:hover,
+.footer-nav-list-item a:focus,
+.footer-socials-list-item a:hover,
+.footer-socials-list-item a:focus {
+  opacity: 0.5;
+  cursor: pointer;
+}*/
+
+.footer-text {
+  /*width: 314.5px;*/
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 1.6;
+  color: #fff;
+  text-align: center;
+}
+
+@media screen and (min-width: 768px) {
+  .footer-nav-list {
+    flex-direction: row;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .footer {
+    padding-bottom: 24px
+  }
+
+  .footer .container {
+    flex-direction: row;
+    /*gap: 80px;*/
+  }
+  .footer-logo {
+    margin-bottom: 0px;
+  }
+
+  .footer-wrap-container {
+    flex-direction: row-reverse;
+    gap: 80px;
+    margin-left: auto;
+  }
+
+  .footer-list-container {
+    flex-direction: row;
+    gap: 80px;
+  }
+}

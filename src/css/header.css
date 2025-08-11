@@ -70,9 +70,11 @@
     inset 0 0 0 1px var(--opacity-neutral-darkest-15),
     inset 0 2px 1px 0 rgba(255, 255, 255, 0.25),
     inset 0 32px 24px 0 var(--opacity-white-5);
+  transition: transform 500ms ease, background-color 500ms ease;  
 }
 .button-link:hover, .button-link:focus{
     background-color: rgba(107, 6, 9, 0.5);
+    transform: scale(0.9);
 }
 @media only screen and (min-width: 768px) {
   .header {
@@ -161,5 +163,9 @@ height: 69px;
     font-size: 16px;
     line-height: 160%;
     margin-right: 32px;
+  }
+
+  .burger-btn {
+    display: none;
   }
 }
