@@ -53,8 +53,8 @@
 .what-say {
     font-size: 16px;
 }
-.text-feedback {
-    font-size: 18px!important;
+.feedback-card .text-feedback {
+    font-size: 18px;
 }
 .swiper-pagination-bullet {
     width: 8px;
@@ -71,8 +71,8 @@
     margin-right: 0;
 }
 
-.swiper-pagination-bullet-active {
-    background-color: #6b0609 !important;
+.common-button-dots .swiper-pagination-bullet-active {
+    background-color: #6b0609;
 }
 .swiper-pagination {
     left: 11% !important;
@@ -102,9 +102,9 @@
     .feedback-card {
         flex: 0 0 calc(33.333% - 16px);
     }
-        .swiper-pagination {
+         .swiper-pagination {
     
-            left: 5.5% !important;
+            left: 5.5%!important ;
         }
 }
 
@@ -167,13 +167,13 @@
 
 
 
-.swiper-pagination {
-    position: relative!important;
-    display: flex!important;
-    height: auto!important;
-    max-width: 50%!important;
-    bottom: 0px!important;
-    justify-content: start!important;
+.common-button-dots .swiper-pagination {
+    position: relative;
+    display: flex;
+    height: auto;
+    max-width: 50%;
+    bottom: 0px;
+    justify-content: start;
   
    
 }
@@ -182,22 +182,21 @@
 
 
 
-.swiper-button-prev,
-.swiper-button-next {
+.buttons-wrapper .swiper-button-prev,
+.buttons-wrapper .swiper-button-next {
     all: unset;
-   
-    background: transparent !important;
+    background: transparent ;
     cursor: pointer;
     outline: none;
     -webkit-tap-highlight-color: transparent;
     appearance: none;
-    position: static !important;
-    width: 48px !important;
-    height: 48px !important;
+    position: static;
+    width: 48px;
+    height: 48px;
     transform: none;
     display: block;
     box-sizing: border-box;
-    margin-top: 0px!important;
+    margin-top: 0px;
 
 }
 
@@ -223,8 +222,8 @@
 
 /* іконки */
 .nav-icon {
-    width: 48px!important;
-    height: 48px!important;
+    width: 48px;
+    height: 48px;
     padding: 12px;
     border-radius: 50%;
  display: block;
@@ -259,10 +258,10 @@
     display: none;
 }
 
-.swiper-button-disabled .nav-icon {
-    background-color: #ccc !important;
-    cursor: not-allowed !important;
-    fill: #080c09!important;
+.common-button-dots .swiper-button-disabled .nav-icon {
+    background-color: #ccc ;
+    cursor: not-allowed ;
+    fill: #080c09;
     border: 1px solid rgba(8, 12, 9, 0.15);
     pointer-events: none;
 
@@ -296,18 +295,6 @@
     transition: background-color 0.3s ease;
 }
 
-.swiper-pagination-bullet-active {
-    background-color: #6b0609 !important;
-}
-.loader {
-    display: block;
-
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-
-.is-hidden {
-    display: none;
+.swiper-pagination .swiper-pagination-bullet-active {
+    background-color: #6b0609;
 }
