@@ -54,6 +54,7 @@ mobileMenuLinks.forEach(link => {
     if (window.innerWidth < 1440){
       burgerBtn.classList.remove('is-hidden');
     }
+
   });
 });
 
