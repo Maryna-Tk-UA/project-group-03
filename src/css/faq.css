@@ -50,6 +50,7 @@ div .ac:last-child {
 }
 
 .ac .ac-trigger {
+  font-family: 'Raleway', sans-serif;
   display: flex;
   align-items: center;
   position: relative;
