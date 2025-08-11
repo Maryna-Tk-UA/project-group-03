@@ -48,11 +48,19 @@ mobileMenuLinks.forEach(link => {
 //  close menu after lіnk to free space
 
 document.addEventListener('click', (event) => {
+  const windowWidth = window.innerWidth;
   const isClickInsideMenu = headerMenu.contains(event.target);
   const isClickOnBurgerBtn = burgerBtn.contains(event.target);
   const isClickOnCloseBtn = closeBtn.contains(event.target);
-  
-if (!isClickInsideMenu && !isClickOnBurgerBtn && !isClickOnCloseBtn && !headerMenu.classList.contains('is-hidden')) {
+
+
+  if (
+    windowWidth >= 768 && windowWidth <= 1439 &&
+    !isClickInsideMenu &&
+    !isClickOnBurgerBtn &&
+    !isClickOnCloseBtn &&
+    !headerMenu.classList.contains('is-hidden')
+  ) {
     headerMenu.classList.add('is-hidden');
     burgerBtn.classList.remove('is-hidden');
     closeBtn.classList.add('is-hidden');
