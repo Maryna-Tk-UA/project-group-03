@@ -11,7 +11,10 @@ export async function getCategories() {
     const res = await axios.get(`${API_BASE}/categories`);
     return res.data;
   } catch (error) {
-    iziToast.error({ message: 'Помилка отримання категорій', position: 'topRight' });
+    iziToast.error({
+      message: 'Помилка отримання категорій',
+      position: 'topRight',
+    });
     return [];
   } finally {
     hideLoader();
@@ -27,10 +30,13 @@ export async function getFurnitures({ category = '0', page = 1, limit = 8 }) {
     const res = await axios.get(`${API_BASE}/furnitures`, { params });
     return {
       furnitures: res.data.furnitures || [],
-      total: res.data.total || 0
+      total: res.data.totalItems || 0,
     };
   } catch (error) {
-    iziToast.error({ message: 'Помилка отримання меблів', position: 'topRight' });
+    iziToast.error({
+      message: 'Помилка отримання меблів',
+      position: 'topRight',
+    });
     return { furnitures: [], total: 0 };
   } finally {
     hideLoader();
