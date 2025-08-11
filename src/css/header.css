@@ -3,14 +3,14 @@
 }
 .no-scroll {
   overflow: hidden;
-  height: 100vh;
+  /* height: 100vh; */
 }
 
 .header {
   background-color: white;
   position: sticky;
   top: 0;
-  z-index: 50;
+  z-index: 100;
   width: 100%;
 }
 .header-container {
@@ -26,7 +26,7 @@
   position: absolute;
   top: 19px;
   right: 19px;
-  z-index: 500;
+  z-index: 150;
 }
 .header-menu {
   align-self: center;
@@ -47,13 +47,11 @@
   gap: 32px;
   justify-content: center;
   align-items: center;
-  
   margin-top: 32px;
 }
 @media only screen and (max-width: 1439px){
   .header-menu-list{
     margin-bottom: 32px;
-
   }
 }
 .button-link {
@@ -77,13 +75,7 @@
     transform: scale(0.9);
 }
 @media only screen and (min-width: 768px) {
-  .header {
-    top: 0;
-    z-index: 50;
-    
-  }
-  
-  .header-menu {
+   .header-menu {
     text-align: end;
     background-color: white;
     transition: transform 0.5s ease;
@@ -119,7 +111,6 @@
   right: 0;
   }
   .header-navigation {
-    align-self: flex-end;
     width: 249px;
     position: absolute;
     top: 72px;
