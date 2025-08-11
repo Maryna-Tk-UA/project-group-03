@@ -83,3 +83,28 @@ export function showLoadMoreButton() {
   loadMoreBtn.classList.remove('is-hidden');
   loadMoreBtn.disabled = false;
 }
+
+
+
+
+
+// Передаємо id та колір для замовлення
+
+export function saveOrderData(_id, color) {
+  const orderData = { _id, color };
+  localStorage.setItem("orderData", JSON.stringify(orderData))
+}
+
+//? Використання
+// const product = { id: "123", name: "Диван", color: "#f5f5f5" }
+// saveOrderData(product.id, product.color)  // передаємо це
+
+
+export function getOrderData() {
+  const data = localStorage.getItem("orderData");
+  return data ? JSON.parse(data) : null;
+}
+
+//? Використання
+// const saveProductData = JSON.parse(localStorage.getItem('orderData'));
+// console.log(saveProductData.id, saveProductData.color)
