@@ -36,11 +36,12 @@ closeBtn.classList.add('is-hidden');
 // close menu after lіnk click
 mobileMenuLinks.forEach(link => {
   link.addEventListener('click', () => {
-    headerMenu.classList.add('is-hidden');
+    
     closeBtn.classList.add('is-hidden');
     document.body.classList.remove('no-scroll');
     if (window.innerWidth < 1440){
-    burgerBtn.classList.remove('is-hidden');}
+    burgerBtn.classList.remove('is-hidden');
+  headerMenu.classList.add('is-hidden');}
   });
 });
 

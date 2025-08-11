@@ -31,11 +31,6 @@
   outline-offset: -8px;
 }
 
-.img_category {
-  width: 159px;
-  height: 122px;
-}
-
 .text_category {
   position: absolute;
   top: 50%;
@@ -47,6 +42,10 @@
   text-align: center;
   color: #fff;
   transform: translate(50%, -50%);
+}
+
+.category-item {
+  max-width: calc((100% - 16px) / 2);
 }
 
 .wrapper_category,
@@ -62,14 +61,13 @@
   margin-bottom: 32px;
 }
 
+.furniture-item {
+  max-width: 100%;
+}
+
 .furniture-img-wrap {
   border-radius: 8px;
   overflow: hidden;
-}
-
-.furniture-img {
-  width: 335px;
-  height: 277px;
 }
 
 .furniture-text-wrap {
@@ -132,7 +130,7 @@
 
 .furniture-btn {
   border-radius: 100px;
-  width: 335px;
+  width: 100%;
   height: 46px;
   border: none;
   box-shadow: 0 1px 2px 0 rgba(8, 12, 9, 0.05), inset 0 -2px 1px 0 rgba(8, 12, 9, 0.05), inset 0 0 0 1px rgba(8, 12, 9, 0.05);
@@ -145,12 +143,12 @@
 .furniture-btn:hover,
 .load-more:hover {
  opacity: 0.5;
- transform: scale(0.9);
+ transform: scale(0.95);
 }
 
 .load-more {
   border-radius: 100px;
-  width: 340px;
+  width: 100%;
   height: 46px;
   border: none;
   font-weight: 500;
@@ -162,9 +160,6 @@
   transition: opacity 500ms ease, transform 500ms ease;
 }
 
-.btn-is-hidden {
-  display: none;
-}
 
 @media only screen and (min-width: 768px) {
 
@@ -180,13 +175,12 @@
   gap: 24px;
 }
 
-.img_category {
-  width: 158px;
+.category-item {
+  max-width: calc((100% - 72px) / 4);
 }
 
-.furniture-img {
-  width: 340px;
-  height: 281px;
+.furniture-item {
+  max-width: calc((100% - 24px) / 2);
 }
 
 .furniture-subtitle {
@@ -197,7 +191,8 @@
   font-size: 20px;
 }
 
-.furniture-btn {
+.furniture-btn,
+.load-more {
   width: 340px;
 }  
 }
@@ -209,8 +204,12 @@
   padding: 80px 0;
 }
 
-.img_category {
-  width: 166px;
+.category-item {
+  max-width: calc((100% - 144px) / 7);
+}
+
+.furniture-item {
+  max-width: calc((100% - 72px) / 4);
 }
 
 .text_category {
@@ -220,11 +219,6 @@
 .furniture-list {
   justify-content: center;
   row-gap: 40px;
-}
-
-.furniture-img {
-  width: 310px;
-  height: 256px;
 }
 
 .furniture-btn {
