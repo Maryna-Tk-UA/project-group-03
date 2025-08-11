@@ -195,14 +195,24 @@ export const imgArr = [
 
 // Працюй, падлюка!
 
+
+const state = {
+  categories: [],
+  currentCategoryId: '0',
+  currentPage: 1,
+  limit: 8,
+  totalLoaded: 0,
+  totalAvailable: 0,
+  lastLoadedFurnitures: []
+}
 // --- Стан ---
-let categories = [];
-let currentCategoryId = '0'; // '0' - всі товари
-let currentPage = 1;
-const limit = 8;
-let totalLoaded = 0;
-let totalAvailable = 0;
-let lastLoadedFurnitures = [];
+// let categories = [];
+// let currentCategoryId = '0'; // '0' - всі товари
+// let currentPage = 1;
+// const limit = 8;
+// let totalLoaded = 0;
+// let totalAvailable = 0;
+// let lastLoadedFurnitures = [];
 // --- Функції ---
 
 // Отримання категорій
@@ -283,7 +293,7 @@ async function fetchFurnitures({ category = '0', page = 2, limit = 8 } = {}) {
 // Рендер меблів, append = true додає в кінець списку
 function renderFurnitureList(furnitures, append = false) {
   if (!append) {
-    lastLoadedFurnitures = furnitures;  // Зберігаємо нові дані при повній заміні списку
+    state.lastLoadedFurnitures = furnitures;  // Зберігаємо нові дані при повній заміні списку
     furnitureList.innerHTML = '';
   } else {
     lastLoadedFurnitures = [...lastLoadedFurnitures, ...furnitures];  // Додаємо при дозавантаженні
@@ -333,7 +343,7 @@ function renderFurnitureList(furnitures, append = false) {
 
 // Оновлення кнопки "Показати ще"
 function updateLoadMoreButton() {
-  if (totalLoaded >= totalAvailable) {
+  if (state.totalLoaded >= state.totalAvailable) {
     loadMoreBtn.classList.add('is-hidden');
     loadMoreBtn.disabled = true;
   } else {
@@ -344,11 +354,11 @@ function updateLoadMoreButton() {
 
 // Логіка вибору категорії та оновлення списку меблів
 async function onCategorySelected(categoryId) {
-  if (categoryId === currentCategoryId) return;
+  if (state.categoryId === state.currentCategoryId) return;
 
-  currentCategoryId = categoryId;
-  currentPage = 1;
-  totalLoaded = 0;
+  state.currentCategoryId = categoryId;
+  state.currentPage = 1;
+  state.totalLoaded = 0;
 
   // Акцент вибраної категорії
   categoriesList.querySelectorAll('.category-item').forEach(item => {
@@ -356,12 +366,12 @@ async function onCategorySelected(categoryId) {
   });
 
   const { furnitures, total } = await fetchFurnitures({
-    category: currentCategoryId,
-    page: currentPage,
-    limit,
+    category: state.currentCategoryId,
+    page: state.currentPage,
+    limit: state.limit
   });
-  totalAvailable = total || 0;
-  totalLoaded = furnitures.length;
+  state.totalAvailable = total || 0;
+  state.totalLoaded = furnitures.length;
 
   renderFurnitureList(furnitures, false);
   updateLoadMoreButton();
@@ -376,7 +386,7 @@ categoriesList.addEventListener('click', e => {
 
 // Обробник кнопки "Показати ще"
 loadMoreBtn.addEventListener('click', async () => {
-  if (totalLoaded >= totalAvailable) return;
+  if (state.totalLoaded >= state.totalAvailable) return;
 
   currentPage++;
   const { furnitures, total } = await fetchFurnitures({
@@ -399,7 +409,7 @@ furnitureList.addEventListener('click', e => {
 
   const furnitureId = btn.dataset.id;
   
-    const product = lastLoadedFurnitures.find(item => item._id === furnitureId);
+    const product = state.lastLoadedFurnitures.find(item => item._id === furnitureId);
 
   if (product) {
     openProductModal(product);
@@ -411,29 +421,63 @@ furnitureList.addEventListener('click', e => {
       }
 });
 
+
+
+
 // Початкова ініціалізація
 async function init() {
-  categories = await fetchCategory();
+  state.categories = await fetchCategory();
   categoriesList.innerHTML = createMarkupCategory(
-    categories,
+    state.categories,
     imgArr,
-    currentCategoryId
+    state.currentCategoryId
   );
 
-  currentPage = 1;
-  totalLoaded = 0;
+  state.currentPage = 1;
+  state.totalLoaded = 0;
 
   const { furnitures, total } = await fetchFurnitures({
-    category: currentCategoryId,
-    page: currentPage,
-    limit,
+    category: state.currentCategoryId,
+    page: state.currentPage,
+    limit: state.limit
   });
 
-  totalAvailable = total || 0;
-  totalLoaded = furnitures.length;
+  state.totalAvailable = total || 0;
+  state.totalLoaded = furnitures.length;
 
   renderFurnitureList(furnitures, false);
-  updateLoadMoreButton();
+  await loadFurnitures(false);
+  // updateLoadMoreButton();
 }
 
 init();
+
+// Додає слухача для перевірки вибраного кольору для мебелі. Не дає вибирати більше одного кольору.
+//cb - checkbox
+document.addEventListener('change', event => {
+  if (event.target.matches('.color-checkbox input[type="checkbox"]')) {
+    const group = event.target.closest('.color-checkboxes');
+    group.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+      if (cb !== event.target) cb.checked = false;
+    });
+  }
+});
+
+async function loadFurnitures(append) {
+  const { furnitures, total } = await fetchFurnitures({
+    category: state.currentCategoryId,
+    limit: state.limit,
+  });
+  state.totalAvailable = total;
+  state.totalLoaded += furnitures.length;
+  renderFurnitureList(furnitures, append);
+  if (state.totalLoaded >= state.totalAvailable) {
+    // hideLoadMoreButton();
+    iziToast.info({
+      message: 'Більше немає товарів у цій категорії!',
+      position: 'topRight',
+    });
+  } else {
+    showLoadMoreButton();
+  }
+}
