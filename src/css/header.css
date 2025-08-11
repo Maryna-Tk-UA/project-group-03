@@ -1,8 +1,9 @@
-body{
-  background-color: #6b0609;
-}
 .is-hidden {
   display: none;
+}
+.no-scroll {
+  overflow: hidden;
+  height: 100vh;
 }
 
 .header {
