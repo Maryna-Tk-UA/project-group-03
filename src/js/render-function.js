@@ -38,11 +38,9 @@ export function furnitureItemTemplate({ _id, name, price, images, color }) {
       <div class="furniture-img-wrap">
         <img class="furniture-img" src="${images[0] || ''}" alt="${name}" />
       </div>
-      <div class="furniture-text-wrap">
         <h3 class="furniture-subtitle">${name}</h3>
         <div class="color-checkboxes">${colorsMarkup}</div>
         <p class="furniture-text">${price} грн</p>
-      </div>
       <button class="furniture-btn" type="button" data-id="${_id}">Детальніше</button>
     </li>
   `;

@@ -68,10 +68,7 @@
 .furniture-img-wrap {
   border-radius: 8px;
   overflow: hidden;
-}
-
-.furniture-text-wrap {
-  padding: 16px 0;
+  margin-bottom: 16px;
 }
 
 .furniture-subtitle {
@@ -126,6 +123,7 @@
   font-weight: 600;
   font-size: 18px;
   line-height: 1.6;
+  margin-bottom: 16px;
 }
 
 .furniture-btn {
