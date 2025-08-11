@@ -76,18 +76,12 @@ export function renderFurnitures(furnitures, append = false) {
   furnitureList.insertAdjacentHTML('beforeend', markup);
 }
 
-export function updateLoadMoreBtn() {
-  const shouldHide = state.totalLoaded >= state.totalAvailable;
-  loadMoreBtn.classList.toggle('btn-is-hidden', shouldHide);
-  loadMoreBtn.disabled = shouldHide;
-}
-
 export function hideLoadMoreButton() {
-  loadMoreBtn.classList.add('btn-is-hidden');
+  loadMoreBtn.classList.add('is-hidden');
   loadMoreBtn.disabled = true;
 }
 
 export function showLoadMoreButton() {
-  loadMoreBtn.classList.remove('btn-is-hidden');
+  loadMoreBtn.classList.remove('is-hidden');
   loadMoreBtn.disabled = false;
 }
