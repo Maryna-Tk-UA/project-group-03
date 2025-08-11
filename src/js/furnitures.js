@@ -37,7 +37,7 @@ loadMoreBtn.addEventListener('click', async () => {
 furnitureList.addEventListener('click', e => {
   const btn = e.target.closest('.furniture-btn');
   if (!btn) return;
-  // відкрити модалку
+  // Сюди вставити команду для відкриття модального вікна
 });
 
 // Додає слухача для перевірки вибраного кольору для мебелі. Не дає вибирати більше одного кольору.

@@ -1,9 +1,5 @@
-import {
-  Notify
-} from 'notiflix/build/notiflix-notify-aio';
-import {
-  sendOrder
-} from './api';
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
+import { sendOrder } from './api';
 
 const orderModal = document.querySelector('.backdrop');
 const orderModalForm = document.querySelector('.modal-form');
@@ -37,7 +33,7 @@ function closeModalOnOverlayClick(event) {
 
 orderModalCloseBtn.addEventListener('click', closeOrderModal);
 
-orderModalForm.addEventListener('submit', async (event) => {
+orderModalForm.addEventListener('submit', async event => {
   event.preventDefault();
 
   const name = orderModalForm.elements['user-name'].value;
@@ -60,7 +56,4 @@ orderModalForm.addEventListener('submit', async (event) => {
   }
 });
 
-export {
-  openOrderModal,
-  closeOrderModal
-};
+export { openOrderModal, closeOrderModal };
