@@ -27,7 +27,6 @@ const orderModalCloseBtn = document.querySelector('.modal-close-btn');
 
 function openOrderModal(furnitureId, color) {
    orderModal.classList.add('is-open');
-  console.log("opened");
   
   document.body.style.overflow = 'hidden';
 
