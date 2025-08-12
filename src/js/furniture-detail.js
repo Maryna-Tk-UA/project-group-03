@@ -206,11 +206,6 @@ export const imgArr = [
   { src: img25x, src2x: img26x, alt: 'Меблі від Меблерія' },
 ];
 
-const modal = document.querySelector('.furniture-detail-modal');
-const backdrop = document.querySelector('.backdrop');
-const closeBtn = document.querySelector('.close-btn');
-const modalContent = document.querySelector('.modal-content');
-
 export function openProductModal(product) {
   if (!product) {
     console.error('Продукт не переданий у openProductModal');
