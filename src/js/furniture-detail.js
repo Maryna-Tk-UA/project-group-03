@@ -186,7 +186,7 @@ const furnitureList = document.querySelector('.furniture-list');
 const categoriesList = document.getElementById('categoriesList');
 const loadMoreBtn = document.getElementById('load-more');
 
-const base = import.meta.env.BASE_URL; // тільки для зображень у imgArr
+
 
 const API_BASE = 'https://furniture-store.b.goit.study/api';
 
@@ -208,14 +208,24 @@ export const imgArr = [
 
 // Працюй, падлюка!
 
+
+const state = {
+  categories: [],
+  currentCategoryId: '0',
+  currentPage: 1,
+  limit: 8,
+  totalLoaded: 0,
+  totalAvailable: 0,
+  lastLoadedFurnitures: []
+}
 // --- Стан ---
-let categories = [];
-let currentCategoryId = '0'; // '0' - всі товари
-let currentPage = 1;
-const limit = 8;
-let totalLoaded = 0;
-let totalAvailable = 0;
-let lastLoadedFurnitures = [];
+// let categories = [];
+// let currentCategoryId = '0'; // '0' - всі товари
+// let currentPage = 1;
+// const limit = 8;
+// let totalLoaded = 0;
+// let totalAvailable = 0;
+// let lastLoadedFurnitures = [];
 // --- Функції ---
 
 // Отримання категорій
@@ -223,7 +233,7 @@ async function fetchCategory() {
   showLoader();
   try {
     const res = await axios.get(`${API_BASE}/categories`);
-    return res.data;
+    return res.data || [];
   } catch (error) {
     iziToast.error({
       message: 'Сталася помилка при отриманні категорій',
@@ -269,7 +279,7 @@ function createMarkupCategory(categories, arrImg, activeId) {
 }
 
 // Завантаження меблів з пагінацією та фільтрацією
-async function fetchFurnitures({ category = '0', page = 2, limit = 8 } = {}) {
+async function fetchFurnitures({ category = '0', page = 1, limit = 8 } = {}) {
   showLoader();
   try {
     const params = { page, limit };
@@ -278,8 +288,11 @@ async function fetchFurnitures({ category = '0', page = 2, limit = 8 } = {}) {
     const res = await axios.get(`${API_BASE}/furnitures`, { params });
    
 
-    const furnitures = res.data.furnitures || [];
-    const total = res.data.total || 0;
+     const furnitures = res.data?.furnitures || [];
+    const total =
+  Number(res.data?.total ?? res.data?.totalItems ?? res.data?.totalCount ?? res.data?.totalFurnitures ?? 0);
+
+  
 
     return { furnitures, total };
   } catch (error) {
@@ -296,13 +309,14 @@ async function fetchFurnitures({ category = '0', page = 2, limit = 8 } = {}) {
 // Рендер меблів, append = true додає в кінець списку
 function renderFurnitureList(furnitures, append = false) {
   if (!append) {
-    lastLoadedFurnitures = furnitures;  // Зберігаємо нові дані при повній заміні списку
     furnitureList.innerHTML = '';
+    state.lastLoadedFurnitures = furnitures;  // Зберігаємо нові дані при повній заміні списку
+    
   } else {
-    lastLoadedFurnitures = [...lastLoadedFurnitures, ...furnitures];  // Додаємо при дозавантаженні
+    state.lastLoadedFurnitures = [...state.lastLoadedFurnitures, ...furnitures];  // Додаємо при дозавантаженні
   }
   
-  if (!append) furnitureList.innerHTML = '';
+  // if (!append) furnitureList.innerHTML = '';
 
   if (!Array.isArray(furnitures) || furnitures.length === 0) {
     if (!append)
@@ -345,23 +359,30 @@ function renderFurnitureList(furnitures, append = false) {
 }
 
 // Оновлення кнопки "Показати ще"
-function updateLoadMoreButton() {
-  if (totalLoaded >= totalAvailable) {
-    loadMoreBtn.classList.add('is-hidden');
-    loadMoreBtn.disabled = true;
-  } else {
-    loadMoreBtn.classList.remove('is-hidden');
-    loadMoreBtn.disabled = false;
-  }
+
+function updateLoadMoreButton(lastBatchCount = state.limit) {
+  const reachedTotal =
+    (typeof state.totalAvailable === 'number' && state.totalAvailable > 0)
+      ? state.totalLoaded >= state.totalAvailable
+      : false;
+
+  const lastPageByBatch = lastBatchCount < state.limit;
+
+  const noMore = reachedTotal || lastPageByBatch;
+
+  loadMoreBtn.classList.toggle('is-hidden', noMore);
+  loadMoreBtn.disabled = noMore;
 }
+
+
 
 // Логіка вибору категорії та оновлення списку меблів
 async function onCategorySelected(categoryId) {
-  if (categoryId === currentCategoryId) return;
+  if (categoryId === state.currentCategoryId) return;
 
-  currentCategoryId = categoryId;
-  currentPage = 1;
-  totalLoaded = 0;
+  state.currentCategoryId = categoryId;
+  state.currentPage = 1;
+  state.totalLoaded = 0;
 
   // Акцент вибраної категорії
   categoriesList.querySelectorAll('.category-item').forEach(item => {
@@ -369,15 +390,22 @@ async function onCategorySelected(categoryId) {
   });
 
   const { furnitures, total } = await fetchFurnitures({
-    category: currentCategoryId,
-    page: currentPage,
-    limit,
+    category: state.currentCategoryId,
+    page: state.currentPage,
+    limit: state.limit
   });
-  totalAvailable = total || 0;
-  totalLoaded = furnitures.length;
+  state.totalAvailable = total || 0;
+  state.totalLoaded = furnitures.length;
+
+  
+
 
   renderFurnitureList(furnitures, false);
   updateLoadMoreButton();
+
+  // if (state.totalLoaded >= state.totalAvailable) {
+  //   iziToast.info({ message: 'Більше немає товарів у цій категорії!', position: 'topRight' });
+  // }
 }
 
 // Обробник кліку по категорії
@@ -387,32 +415,41 @@ categoriesList.addEventListener('click', e => {
   onCategorySelected(li.dataset.id);
 });
 
+
 // Обробник кнопки "Показати ще"
 loadMoreBtn.addEventListener('click', async () => {
-  if (totalLoaded >= totalAvailable) return;
+  if (state.totalLoaded >= state.totalAvailable) return;
 
-  currentPage++;
+  state.currentPage += 1;
+
   const { furnitures, total } = await fetchFurnitures({
-    category: currentCategoryId,
-    page: currentPage,
-    limit,
+    category: state.currentCategoryId,
+    page: state.currentPage,
+    limit: state.limit,
   });
 
-  totalAvailable = total || totalAvailable;
-  totalLoaded += furnitures.length;
+  state.totalAvailable = total ?? state.totalAvailable; 
+  state.totalLoaded += furnitures.length;  
+
 
   renderFurnitureList(furnitures, true);
   updateLoadMoreButton();
+
+  if (state.totalLoaded >= state.totalAvailable) {
+    iziToast.info({ message: 'Це всі товари. Більше немає що підвантажити.', position: 'topRight' });
+  }
 });
+
+
 
 // Делегування для кнопки "Детальніше" (поки що alert, можна розширити)
 furnitureList.addEventListener('click', e => {
   const btn = e.target.closest('.furniture-btn');
   if (!btn) return;
 
-  const furnitureId = btn.dataset.id;
+  const id = btn.dataset.id;
   
-    const product = lastLoadedFurnitures.find(item => item._id === furnitureId);
+    const product = state.lastLoadedFurnitures.find(item => item._id === id);
 
   if (product) {
     openProductModal(product);
@@ -424,29 +461,80 @@ furnitureList.addEventListener('click', e => {
       }
 });
 
+
+
+
 // Початкова ініціалізація
 async function init() {
-  categories = await fetchCategory();
+  state.categories = await fetchCategory();
   categoriesList.innerHTML = createMarkupCategory(
-    categories,
+    state.categories,
     imgArr,
-    currentCategoryId
+    state.currentCategoryId
   );
 
-  currentPage = 1;
-  totalLoaded = 0;
+  // state.currentPage = 1;
+  // state.totalLoaded = 0;
 
   const { furnitures, total } = await fetchFurnitures({
-    category: currentCategoryId,
-    page: currentPage,
-    limit,
+    category: state.currentCategoryId,
+    page: state.currentPage,
+    limit: state.limit
   });
 
-  totalAvailable = total || 0;
-  totalLoaded = furnitures.length;
+  state.totalAvailable = total;
+  state.totalLoaded = furnitures.length;
+
+ 
+  // console.log('Loaded/Available:', state.totalLoaded, state.totalAvailable);
+
 
   renderFurnitureList(furnitures, false);
   updateLoadMoreButton();
+
+
+    if (state.totalLoaded >= state.totalAvailable) {
+    updateLoadMoreButton();
+    iziToast.info({
+      message: 'Більше немає товарів у цій категорії!',
+      position: 'topRight',
+    });
+  } else {
+    updateLoadMoreButton();
+  }
+  
+  
+  // updateLoadMoreButton();
 }
 
 init();
+
+// Додає слухача для перевірки вибраного кольору для мебелі. Не дає вибирати більше одного кольору.
+//cb - checkbox
+document.addEventListener('change', event => {
+  if (event.target.matches('.color-checkbox input[type="checkbox"]')) {
+    const group = event.target.closest('.color-checkboxes');
+    group.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+      if (cb !== event.target) cb.checked = false;
+    });
+  }
+});
+
+async function loadFurnitures(append) {
+  const { furnitures, total } = await fetchFurnitures({
+    category: state.currentCategoryId,
+    limit: state.limit,
+  });
+  state.totalAvailable = total;
+  state.totalLoaded += furnitures.length;
+  renderFurnitureList(furnitures, append);
+  if (state.totalLoaded >= state.totalAvailable) {
+    updateLoadMoreButton();
+    iziToast.info({
+      message: 'Більше немає товарів у цій категорії!',
+      position: 'topRight',
+    });
+  } else {
+    updateLoadMoreButton();
+  }
+}

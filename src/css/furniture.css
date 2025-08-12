@@ -75,6 +75,12 @@
   font-weight: 600;
   line-height: 1.6;
   margin-bottom: 8px;
+    display: -webkit-box;
+  -webkit-line-clamp: 1;  /* лише 1 рядок */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis; /* додає ... */
+  white-space: normal; 
 }
 
 .color-checkboxes {
@@ -135,13 +141,12 @@
   background-color: rgba(8, 12, 9, 0.05);
   font-weight: 500;
   line-height: 1.6;
-  transition: opacity 500ms ease, transform 500ms ease;
+  transition: opacity 500ms ease;
 }
 
 .furniture-btn:hover,
 .load-more:hover {
  opacity: 0.5;
- transform: scale(0.95);
 }
 
 .load-more {
@@ -157,6 +162,8 @@
   margin: 0 auto;
   transition: opacity 500ms ease, transform 500ms ease;
 }
+
+#load-more.is-hidden { display: none; }
 
 
 @media only screen and (min-width: 768px) {
