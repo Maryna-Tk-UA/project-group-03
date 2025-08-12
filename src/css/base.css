@@ -32,4 +32,9 @@ html {
   scroll-behavior: smooth;
 }
 
+.is-hidden {
+  display: none;
+  visibility: hidden
+}
+
 
