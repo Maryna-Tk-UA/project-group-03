@@ -1,4 +1,4 @@
-.backdrop {
+.backdrop-modal {
     position: fixed;
     top: 0;
     left: 0;
@@ -8,13 +8,13 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    /* opacity: 0;
-    visibility: hidden; */
+    opacity: 0;
+    visibility: hidden;
     transition: opacity 0.3s ease, visibility 0.3s ease;
     z-index: 1000;
 }
 
-.backdrop.is-open {
+.backdrop-modal.is-open {
     opacity: 1;
     visibility: visible;
     pointer-events: auto;
@@ -36,7 +36,7 @@
     align-items: center;
 }
 
-.backdrop.is-open .modal {
+.backdrop-modal.is-open .modal {
     transform: scale(1);
 }
 
