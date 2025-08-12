@@ -1,0 +1,16 @@
+.modal-furniture {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-furniture.is-open {
+    display: flex;
+    /* модалка відкрита */
+}
