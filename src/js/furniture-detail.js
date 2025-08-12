@@ -1,3 +1,4 @@
+import { openOrderModal } from './order-modal.js';
 const modal = document.querySelector(".furniture-detail-modal");
 const backdrop = document.querySelector(".backdrop");
 const closeBtn = document.querySelector(".close-btn");
@@ -89,6 +90,7 @@ export function openProductModal(product) {
       }
       console.log("Обраний колір:", checkedColor.value);
       closeModal();
+      openOrderModal(product._id, checkedColor.value);
     });
   }
 }
@@ -137,6 +139,17 @@ document.addEventListener("keydown", e => {
     closeModal();
   }
 })
+
+modalContent.addEventListener('change', event => {
+  if (event.target.matches('.color-list input[type="checkbox"]')) {
+    const group = event.target.closest('.color-list');
+    group.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+      if (cb !== event.target) cb.checked = false;
+    });
+  }
+});
+
+
 import axios from 'axios';
 import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';

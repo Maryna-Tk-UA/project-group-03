@@ -21,16 +21,16 @@ modalForm.addEventListener('submit', async event => {
 
   // === Підготовка даних для відправки ===
   const formData = {
-    userName: modalForm['user-name'].value.trim(),
-    userPhone: modalForm['user-phone'].value.trim(),
-    userComment: modalForm['user-comment'].value.trim(),
-    furnitureId,
-    markerValue,
+     email: modalForm['user-email'].value.trim(),
+  phone: modalForm['user-phone'].value.trim(),
+  comment: modalForm['user-comment'].value.trim(),
+  modelId: furnitureId,
+  color: markerValue,
   };
 
   // === Відправка POST-запиту на сервер ===
   try {
-    const response = await fetch('/orders', {
+    const response = await fetch('https://furniture-store.b.goit.study/api/orders', {
       method: 'POST', // Метод запиту
       headers: {
         'Content-Type': 'application/json', // Тип тіла запиту
