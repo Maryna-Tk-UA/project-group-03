@@ -1,3 +1,5 @@
+import 'normalize.css';
+
 import "./js/header"
 import "./js/loader"
 import "./js/furniture-detail"
