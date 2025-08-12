@@ -126,7 +126,6 @@ function animateThumbsInModal() {
 
 function onEscKey(e) {
   if (e.key === "Escape" && backdrop.classList.contains("is-open")) {
-    document.removeEventListener("keydown", onEscKey);
     closeModal();
   }
 }
