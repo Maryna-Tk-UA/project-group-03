@@ -1,5 +1,7 @@
-import { Notify } from 'notiflix/build/notiflix-notify-aio';
+// import { Notify } from 'notiflix';
 
+export { openOrderModal, closeOrderModal };
+  
 async function sendOrder(orderData) {
   const response = await fetch('https://furniture-store.b.goit.study/api/orders', {
     method: 'POST',
@@ -78,14 +80,18 @@ orderModalForm.addEventListener('submit', async event => {
     color,
   };
 
+
   try {
     const response = await sendOrder(orderData);
-    Notify.success('Your order has been placed successfully!');
+    Notiflix.Notify.success('Your order has been placed successfully!');
     orderModalForm.reset();
     closeOrderModal();
   } catch (error) {
-    Notify.failure('Something went wrong. Please try again later.');
-  }
+  const message = (error && typeof error.message === 'string')
+    ? error.message
+    : 'Сталася невідома помилка. Спробуйте пізніше.';
+  Notiflix.Notify.failure(message);
+}
+  
 });
 
-export { openOrderModal, closeOrderModal };
