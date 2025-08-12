@@ -1,142 +1,3 @@
-const modal = document.querySelector(".furniture-detail-modal");
-const backdrop = document.querySelector(".backdrop");
-const closeBtn = document.querySelector(".close-btn");
-const modalContent = document.querySelector(".modal-content");
-
-export function openProductModal(product) {
-  if (!product) {
-    console.error("Продукт не переданий у openProductModal");
-    return;
-  }
-
-   const rate = product.rate || 0;
-  const maxIcons = 5;
-
-  const thumbsMarkup = Array.from({ length: maxIcons }, () => `<i class="fa-solid fa-thumbs-up thumb-icon"></i>`).join('');
-  
-  backdrop.classList.add("is-open");
-  document.body.classList.add("no-scroll");
-
-  modalContent.innerHTML = `
-    <div class="images">
-      <div class="main-image-wrapper">
-        <img src="${product.images?.[0] || ''}" alt="${product.name || ''}" class="main-image">
-      </div>
-      <ul class="small-images-list">
-        ${(product.images || [])
-          .slice(1)
-          .map(
-            img => `
-              <li class="small-images-list-item">
-                <img src="${img}" alt="${product.name || ''}" class="thumb">
-              </li>
-            `
-          )
-          .join("")}
-      </ul>
-    </div>
-    <div class="descr">
-      <h3 class="furniture-name">${product.name || ''}</h3>
-      <p class="furniture-category-text">${product.category?.name || ""}</p>
-      <form>
-        <p class="price">${product.price || ''} <span class="currency">грн</span></p>
-        <div class="rating" data-rate="${rate}">
-          ${thumbsMarkup}
-        </div>
-        <p class="color">Колір</p>
-        <ul class="color-list">
-  ${(product.color || [])
-    .map(
-      (color, index) => `
-        <li class="color-list-item">
-          <input type="checkbox" id="color-${index}" name="color-${index}" value="${color}">
-          <label for="color-${index}" style="background:${color};"></label>
-        </li>
-      `
-    )
-    .join("")}
-</ul>
-        <p class="descr-text">${product.description || ""}</p>
-        <p class="product-size">Розміри: ${product.sizes || ""}</p>
-        <button type="submit" class="form-btn">Перейти до замовлення</button>
-      </form>
-    </div>
-  `;
-  animateThumbsInModal();
-
-  // Слухач для мініатюр
-  const smallImages = modalContent.querySelector(".small-images-list");
-  if (smallImages) {
-    smallImages.addEventListener("click", e => {
-      const thumb = e.target.closest(".thumb");
-      if (!thumb) return;
-      const mainImage = modalContent.querySelector(".main-image");
-      const tempSrc = mainImage.src;
-      mainImage.src = thumb.src;
-      thumb.src = tempSrc;
-    });
-  }
-
-  
-  const form = modalContent.querySelector("form");
-  if (form) {
-    form.addEventListener("submit", e => {
-      e.preventDefault();
-      const checkedColor = form.querySelector('input[type="checkbox"]:checked');
-      if (!checkedColor) {
-        alert("Виберіть колір!");
-        return;
-      }
-      console.log("Обраний колір:", checkedColor.value);
-      closeModal();
-    });
-  }
-}
-
-
-function animateThumbsInModal() {
-  const ratingContainer = modalContent.querySelector('.rating');
-  if (!ratingContainer) return;
-
-  const rate = parseFloat(ratingContainer.getAttribute('data-rate'));
-  const icons = ratingContainer.querySelectorAll('.thumb-icon');
-
-  icons.forEach(icon => {
-    icon.classList.remove('fill', 'half');
-  });
-
-  icons.forEach((icon, index) => {
-    setTimeout(() => {
-      if (index < Math.floor(rate)) {
-        icon.classList.add('fill');
-      } else if (index === Math.floor(rate) && rate % 1 !== 0) {
-        icon.classList.add('half');
-      }
-    }, index * 200);
-  });
-}
-
-
-
-function closeModal() {
-  backdrop.classList.remove("is-open");
-  document.body.classList.remove("no-scroll");
-}
-
-if (closeBtn) {
-  closeBtn.addEventListener("click", closeModal);
-}
-
-if (backdrop) {
-  backdrop.addEventListener("click", e => {
-    if (e.target === backdrop) closeModal();
-  });
-}
-document.addEventListener("keydown", e => {
-  if (e.key === "Escape" && backdrop.classList.contains("is-open")) {
-    closeModal();
-  }
-})
 import axios from 'axios';
 import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
@@ -178,11 +39,11 @@ const base = import.meta.env.BASE_URL; // тільки для зображень
 const API_BASE = 'https://furniture-store.b.goit.study/api';
 
 export const imgArr = [
-  { src: img1x,  src2x: img2x,  alt: 'Меблі від Меблерія' },
-  { src: img3x,  src2x: img4x,  alt: 'Меблі від Меблерія' },
-  { src: img5x,  src2x: img6x,  alt: 'Меблі від Меблерія' },
-  { src: img7x,  src2x: img8x,  alt: 'Меблі від Меблерія' },
-  { src: img9x,  src2x: img10x, alt: 'Меблі від Меблерія' },
+  { src: img1x, src2x: img2x, alt: 'Меблі від Меблерія' },
+  { src: img3x, src2x: img4x, alt: 'Меблі від Меблерія' },
+  { src: img5x, src2x: img6x, alt: 'Меблі від Меблерія' },
+  { src: img7x, src2x: img8x, alt: 'Меблі від Меблерія' },
+  { src: img9x, src2x: img10x, alt: 'Меблі від Меблерія' },
   { src: img11x, src2x: img12x, alt: 'Меблі від Меблерія' },
   { src: img13x, src2x: img14x, alt: 'Меблі від Меблерія' },
   { src: img15x, src2x: img16x, alt: 'Меблі від Меблерія' },
@@ -193,8 +54,150 @@ export const imgArr = [
   { src: img25x, src2x: img26x, alt: 'Меблі від Меблерія' },
 ];
 
-// Працюй, падлюка!
+const modal = document.querySelector('.furniture-detail-modal');
+const backdrop = document.querySelector('.backdrop');
+const closeBtn = document.querySelector('.close-btn');
+const modalContent = document.querySelector('.modal-content');
 
+export function openProductModal(product) {
+  if (!product) {
+    console.error('Продукт не переданий у openProductModal');
+    return;
+  }
+
+  const rate = product.rate || 0;
+  const maxIcons = 5;
+
+  const thumbsMarkup = Array.from(
+    { length: maxIcons },
+    () => `<i class="fa-solid fa-thumbs-up thumb-icon"></i>`
+  ).join('');
+
+  backdrop.classList.add('is-open');
+  document.body.classList.add('no-scroll');
+
+  modalContent.innerHTML = `
+    <div class="images">
+      <div class="main-image-wrapper">
+        <img src="${product.images?.[0] || ''}" alt="${
+    product.name || ''
+  }" class="main-image">
+      </div>
+      <ul class="small-images-list">
+        ${(product.images || [])
+          .slice(1)
+          .map(
+            img => `
+              <li class="small-images-list-item">
+                <img src="${img}" alt="${product.name || ''}" class="thumb">
+              </li>
+            `
+          )
+          .join('')}
+      </ul>
+    </div>
+    <div class="descr">
+      <h3 class="furniture-name">${product.name || ''}</h3>
+      <p class="furniture-category-text">${product.category?.name || ''}</p>
+      <form>
+        <p class="price">${
+          product.price || ''
+        } <span class="currency">грн</span></p>
+        <div class="rating" data-rate="${rate}">
+          ${thumbsMarkup}
+        </div>
+        <p class="color">Колір</p>
+        <ul class="color-list">
+  ${(product.color || [])
+    .map(
+      (color, index) => `
+        <li class="color-list-item">
+          <input type="checkbox" id="color-${index}" name="color-${index}" value="${color}">
+          <label for="color-${index}" style="background:${color};"></label>
+        </li>
+      `
+    )
+    .join('')}
+</ul>
+        <p class="descr-text">${product.description || ''}</p>
+        <p class="product-size">Розміри: ${product.sizes || ''}</p>
+        <button type="submit" class="form-btn">Перейти до замовлення</button>
+      </form>
+    </div>
+  `;
+  animateThumbsInModal();
+
+  // Слухач для мініатюр
+  const smallImages = modalContent.querySelector('.small-images-list');
+  if (smallImages) {
+    smallImages.addEventListener('click', e => {
+      const thumb = e.target.closest('.thumb');
+      if (!thumb) return;
+      const mainImage = modalContent.querySelector('.main-image');
+      const tempSrc = mainImage.src;
+      mainImage.src = thumb.src;
+      thumb.src = tempSrc;
+    });
+  }
+
+  const form = modalContent.querySelector('form');
+  if (form) {
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      const checkedColor = form.querySelector('input[type="checkbox"]:checked');
+      if (!checkedColor) {
+        alert('Виберіть колір!');
+        return;
+      }
+      console.log('Обраний колір:', checkedColor.value);
+      closeModal();
+    });
+  }
+}
+
+function animateThumbsInModal() {
+  const ratingContainer = modalContent.querySelector('.rating');
+  if (!ratingContainer) return;
+
+  const rate = parseFloat(ratingContainer.getAttribute('data-rate'));
+  const icons = ratingContainer.querySelectorAll('.thumb-icon');
+
+  icons.forEach(icon => {
+    icon.classList.remove('fill', 'half');
+  });
+
+  icons.forEach((icon, index) => {
+    setTimeout(() => {
+      if (index < Math.floor(rate)) {
+        icon.classList.add('fill');
+      } else if (index === Math.floor(rate) && rate % 1 !== 0) {
+        icon.classList.add('half');
+      }
+    }, index * 200);
+  });
+}
+
+function closeModal() {
+  backdrop.classList.remove('is-open');
+  document.body.classList.remove('no-scroll');
+}
+
+if (closeBtn) {
+  closeBtn.addEventListener('click', closeModal);
+}
+
+if (backdrop) {
+  backdrop.addEventListener('click', e => {
+    if (e.target === backdrop) closeModal();
+  });
+}
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && backdrop.classList.contains('is-open')) {
+    closeModal();
+  }
+});
+
+// Працюй, падлюка!
 
 const state = {
   categories: [],
@@ -203,8 +206,8 @@ const state = {
   limit: 8,
   totalLoaded: 0,
   totalAvailable: 0,
-  lastLoadedFurnitures: []
-}
+  lastLoadedFurnitures: [],
+};
 // --- Стан ---
 // let categories = [];
 // let currentCategoryId = '0'; // '0' - всі товари
@@ -228,7 +231,7 @@ async function fetchCategory() {
     });
     return [];
   } finally {
-  hideLoader();
+    hideLoader();
   }
 }
 
@@ -273,7 +276,6 @@ async function fetchFurnitures({ category = '0', page = 2, limit = 8 } = {}) {
     if (category !== '0') params.category = category;
 
     const res = await axios.get(`${API_BASE}/furnitures`, { params });
-   
 
     const furnitures = res.data.furnitures || [];
     const total = res.data.total || 0;
@@ -293,12 +295,12 @@ async function fetchFurnitures({ category = '0', page = 2, limit = 8 } = {}) {
 // Рендер меблів, append = true додає в кінець списку
 function renderFurnitureList(furnitures, append = false) {
   if (!append) {
-    state.lastLoadedFurnitures = furnitures;  // Зберігаємо нові дані при повній заміні списку
+    state.lastLoadedFurnitures = furnitures; // Зберігаємо нові дані при повній заміні списку
     furnitureList.innerHTML = '';
   } else {
-    lastLoadedFurnitures = [...lastLoadedFurnitures, ...furnitures];  // Додаємо при дозавантаженні
+    lastLoadedFurnitures = [...lastLoadedFurnitures, ...furnitures]; // Додаємо при дозавантаженні
   }
-  
+
   if (!append) furnitureList.innerHTML = '';
 
   if (!Array.isArray(furnitures) || furnitures.length === 0) {
@@ -326,7 +328,9 @@ function renderFurnitureList(furnitures, append = false) {
 
       return `
         <li class="furniture-item" data-id="${_id}">
-          <div class="furniture-img-wrap"><img class="furniture-img" src="${images[0] || ''}" alt="${name}" /></div>
+          <div class="furniture-img-wrap"><img class="furniture-img" src="${
+            images[0] || ''
+          }" alt="${name}" /></div>
           <div class="furniture-text-wrap">
           <h3 class="furniture-subtitle">${name}</h3>
           <div class="color-checkboxes">${colorsMarkup}</div>
@@ -368,7 +372,7 @@ async function onCategorySelected(categoryId) {
   const { furnitures, total } = await fetchFurnitures({
     category: state.currentCategoryId,
     page: state.currentPage,
-    limit: state.limit
+    limit: state.limit,
   });
   state.totalAvailable = total || 0;
   state.totalLoaded = furnitures.length;
@@ -408,8 +412,10 @@ furnitureList.addEventListener('click', e => {
   if (!btn) return;
 
   const furnitureId = btn.dataset.id;
-  
-    const product = state.lastLoadedFurnitures.find(item => item._id === furnitureId);
+
+  const product = state.lastLoadedFurnitures.find(
+    item => item._id === furnitureId
+  );
 
   if (product) {
     openProductModal(product);
@@ -418,11 +424,8 @@ furnitureList.addEventListener('click', e => {
       message: 'Товар не знайдено',
       position: 'topRight',
     });
-      }
+  }
 });
-
-
-
 
 // Початкова ініціалізація
 async function init() {
@@ -439,7 +442,7 @@ async function init() {
   const { furnitures, total } = await fetchFurnitures({
     category: state.currentCategoryId,
     page: state.currentPage,
-    limit: state.limit
+    limit: state.limit,
   });
 
   state.totalAvailable = total || 0;
