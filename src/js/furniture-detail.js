@@ -13,8 +13,8 @@ export function openProductModal(product) {
     })
     return;
   }
-
-   const rate = product.rate || 0;
+  document.addEventListener("keydown", onEscKey);
+  const rate = product.rate || 0;
   const maxIcons = 5;
 
   const thumbsMarkup = Array.from({ length: maxIcons }, () => `<i class="fa-solid fa-thumbs-up thumb-icon"></i>`).join('');
@@ -69,7 +69,7 @@ export function openProductModal(product) {
   `;
   animateThumbsInModal();
 
-  // Слухач для мініатюр
+
   const smallImages = modalContent.querySelector(".small-images-list");
   if (smallImages) {
     smallImages.addEventListener("click", e => {
@@ -95,7 +95,6 @@ export function openProductModal(product) {
         })
         return;
       }
-     
       closeModal();
       openOrderModal(product._id, checkedColor.value);
     });
@@ -125,11 +124,17 @@ function animateThumbsInModal() {
   });
 }
 
-
+function onEscKey(e) {
+  if (e.key === "Escape" && backdrop.classList.contains("is-open")) {
+    document.removeEventListener("keydown", onEscKey);
+    closeModal();
+  }
+}
 
 function closeModal() {
   backdrop.classList.remove("is-open");
   document.body.classList.remove("no-scroll");
+  document.removeEventListener("keydown", onEscKey)
 }
 
 if (closeBtn) {
@@ -141,11 +146,7 @@ if (backdrop) {
     if (e.target === backdrop) closeModal();
   });
 }
-document.addEventListener("keydown", e => {
-  if (e.key === "Escape" && backdrop.classList.contains("is-open")) {
-    closeModal();
-  }
-})
+
 
 modalContent.addEventListener('change', event => {
   if (event.target.matches('.color-list input[type="checkbox"]')) {
