@@ -121,9 +121,9 @@ modalForm.addEventListener('submit', async event => {
           : 'Сталася помилка при відправці заявки.';
       Notify.failure(errorMessage);
     }
-  // } catch (error) {
-  //   Notify.failure('Не вдалося надіслати заявку. Спробуйте пізніше.');
-  // }
+  } catch (error) {
+    Notify.failure('Не вдалося надіслати заявку. Спробуйте пізніше.');
+  }
 });
 
 // === Закриття модалки замовлення ===

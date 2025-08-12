@@ -1,12 +1,16 @@
-import { openOrderModal } from './order-modal.js';
+import { openOrderModal } from './order-modal';
 const modal = document.querySelector(".furniture-detail-modal");
 const backdrop = document.querySelector(".backdrop");
 const closeBtn = document.querySelector(".close-btn");
 const modalContent = document.querySelector(".modal-content");
 
+
 export function openProductModal(product) {
   if (!product) {
-    console.error("Продукт не переданий у openProductModal");
+    iziToast.warning({
+      message: "Продукт не обраний",
+      position: "topRight"
+    })
     return;
   }
 
@@ -85,10 +89,13 @@ export function openProductModal(product) {
       e.preventDefault();
       const checkedColor = form.querySelector('input[type="checkbox"]:checked');
       if (!checkedColor) {
-        alert("Виберіть колір!");
+        iziToast.info({
+          message: "Оберіть, будь ласка, колір.",
+          position: "topRight"
+        })
         return;
       }
-      console.log("Обраний колір:", checkedColor.value);
+     
       closeModal();
       openOrderModal(product._id, checkedColor.value);
     });
@@ -442,7 +449,7 @@ loadMoreBtn.addEventListener('click', async () => {
 
 
 
-// Делегування для кнопки "Детальніше" (поки що alert, можна розширити)
+
 furnitureList.addEventListener('click', e => {
   const btn = e.target.closest('.furniture-btn');
   if (!btn) return;
@@ -486,7 +493,7 @@ async function init() {
   state.totalLoaded = furnitures.length;
 
  
-  // console.log('Loaded/Available:', state.totalLoaded, state.totalAvailable);
+  
 
 
   renderFurnitureList(furnitures, false);
