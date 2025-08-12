@@ -98,7 +98,7 @@ body .ac .ac-trigger:focus {
 
 @media only screen and (min-width: 1200px) {
   .faq {
-    margin: 80px 0;
+    padding: 80px 0;
   }
 
   .accordion-container {
