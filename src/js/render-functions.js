@@ -1,4 +1,6 @@
 const categoriesList = document.querySelector(".categories-list");
+const furnitureList = document.querySelector(".furniture-list");
+
 
 export function renderCategories(categ, imgArr) {
   if(!categ || !imgArr) return '';
@@ -22,4 +24,35 @@ export function renderCategories(categ, imgArr) {
   `).join('');
 
   categoriesList.innerHTML = firstLi+otherLi;
+}
+
+
+export function renderFurniture (furnituresArr) {
+    const markup = furnituresArr.map (({ _id, name, color, images, price }) => {
+        const colorsOfFurnitures = Array.isArray(color) && color.length > 0
+        ? color.map(c => {
+            const cleanColorId = c.replace(/[^a-zA-Z0-9]/g, '');
+            return `
+            <div class="color-checkbox">
+              <input type="checkbox" id="color-${_id}-${cleanColorId}" name="color-${_id}" value="${c}" />
+              <label for="color-${_id}-${cleanColorId}" style="background-color: ${c};" title="${c}"></label>
+            </div>
+            `
+        }
+        ).join('')
+        : ''
+     return `
+      <li class="furniture-item" data-id="${_id}">
+          <img class="furniture-img" src="${images[0] || ''}" alt="${name}" />
+          
+          <h3 class="furniture-subtitle">${name}</h3>
+          <div class="color-checkboxes">${colorsOfFurnitures}</div>
+          <p class="furniture-text">${price} грн</p>
+          
+          <button class="furniture-btn" type="button" data-id="${_id}">Детальніше</button>
+      </li>
+    `    
+    }).join('');
+   
+    furnitureList.insertAdjacentHTML("beforeend", markup);
 }

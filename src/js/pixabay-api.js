@@ -14,11 +14,29 @@ export async function fetchCategories() {
     showLoader();
     try {
       const res = await axios.get(`${API_BASE}${endpoints.category}`)
+    //   console.log(res.data)
       return res.data;
-      console.log(res.data)
     } catch(error) {
-        console.log(error)
+        throw error;
     } finally {
         hideLoader();
     }  
+}
+
+
+
+
+export async function fetchFurnitures({ page, limit, categoryId }) {
+    showLoader();
+    try {
+      const params = { page, limit };
+      
+      const res = await axios.get(`${API_BASE}${endpoints.furniture}`, { params })
+      console.log(res.data.furnitures);
+      return res.data.furnitures || [];
+    } catch(error) {
+        throw error;
+    } finally {
+        hideLoader();
+    }
 }
