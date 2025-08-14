@@ -1,17 +1,16 @@
-const categoriesList = document.querySelector(".categories-list");
-const furnitureList = document.querySelector(".furniture-list");
-
+import { fetchFurnitures } from './pixabay-api';
+import { categoriesList, furnitureList, state } from './refs'
 
 export function renderCategories(categ, imgArr) {
   if(!categ || !imgArr) return '';
 
   const firstLi = `
-  <li class="category-item special-category wrapper_category"
-   data-id="0">
-     <img class="img_category" src="${imgArr[0].src}" 
-     srcset="${imgArr[0].src2x} 2x" alt=${imgArr[0].alt}"/>
-     <p class="text_category">Всі товари}</p>
-   </li>
+    <li class="category-item special-category wrapper_category active"
+        data-id="0">
+      <img class="img_category" src="${imgArr[0].src}" 
+           srcset="${imgArr[0].src2x} 2x" alt="${imgArr[0].alt}"/>
+      <p class="text_category">Всі товари</p>
+    </li>
   `;
 
   const otherLi = categ.map(({ _id, name }, i) => `
@@ -23,11 +22,12 @@ export function renderCategories(categ, imgArr) {
    </li>
   `).join('');
 
-  categoriesList.innerHTML = firstLi+otherLi;
+  categoriesList.innerHTML = firstLi + otherLi;
 }
 
 
 export function renderFurniture (furnituresArr) {
+    
     const markup = furnituresArr.map (({ _id, name, color, images, price }) => {
         const colorsOfFurnitures = Array.isArray(color) && color.length > 0
         ? color.map(c => {
@@ -55,4 +55,42 @@ export function renderFurniture (furnituresArr) {
     }).join('');
    
     furnitureList.insertAdjacentHTML("beforeend", markup);
+}
+
+
+export async function categorySelected(categoryId) {
+    try {
+        // 1. Оновимо активний елемент
+        //  Знаходимо усі елементи категорії, прибираємо клас active, щоб зняти попереднє підсвічування
+        categoriesList.querySelectorAll('.category-item')
+        .forEach(li => li.classList.remove('active'));
+        
+        //  Шукаємо елемент, у якого data-id дорівнює categoryId
+        const current = categoriesList.querySelector(`[data-id="${categoryId}"]`);
+
+        //  Підсвічуємо новообрану категорію у списку
+        if(current) current.classList.add('active');
+
+        // 2. Стан: зберігаємо вибрану категорію і скидаємо пагінацію
+        state.categoryId = String(categoryId); // data-id зберігається рядком в html
+        state.page = 1;  // при зміні категорії, показ з першої сторінки
+        state.totalLoaded = 0; // скидаємо лічильник завантажених товарів
+
+        // 3. Очищуємо список перед новим завантаженням
+        furnitureList.innerHTML = '';
+
+        // 4. Тягнемо товари під обрану категорію
+        const furnitures = await fetchFurnitures({
+            page: state.page, // 1 для початку, або 2, 3... при натисканні Завантажити ще
+            limit: state.limit,  // наш ліміт
+            categoryId: state.categoryId,  // вибрана категорія
+        })
+
+        // 5. Відмальовуємо
+        renderFurniture(furnitures);
+        
+
+    } catch(error) {
+        throw error;
+    }
 }

@@ -1,42 +1,44 @@
+import iziToast from "izitoast";
 import { imgArr } from "./img-for-furniture";
 import { fetchCategories, fetchFurnitures } from "./pixabay-api";
-import { renderCategories, renderFurniture } from "./render-functions";
+import { categorySelected, renderCategories, renderFurniture } from "./render-functions";
+import { categoriesList, state } from "./refs";
 
-// Стан пагінації:
-const state = {
-    page: 1,            // номер початкової сторінки
-                    // при кліку на "Завантажити ще", збільшувати
-    limit: 8,           // кілкість елементів, отриманих за раз
-    totalItems: 0,      // загальна кількість елементів на сервері 
-                    // для розрахунку кількості сторінок і визначення коли товари закінчилися      
-    totalPage: 0,       // скільки сторінок доступно (Math.ceil(totalItems / limit))
-                    // для порівняння з page і знати, чи показувати кнопку "Завантажити ще"
-    isLoading: false,    // прапорець, чи триває зараз завантаження
-                    // запобігає повторним запитам
-    categories: [],
-    categoryId: '0',
-    lastLoadedFurnitures: [] // сюди зберігаємо завантажені меблі                
-}
-// const state = {
-//   categories: [],
-//   currentCategoryId: '0',
-//   currentPage: 1,
-//   limit: 8,
-//   totalLoaded: 0,
-//   totalAvailable: 0,
-//   lastLoadedFurnitures: []
-// }
+
+categoriesList.addEventListener('click', e => {
+  const li = e.target.closest('li.category-item');
+  if (!li) return;
+  categorySelected(li.dataset.id);
+
+});
 
 async function init() {
     try {
+        // 1. Малюємо категорії
 const getCateg = await fetchCategories();
 renderCategories(getCateg, imgArr);
 
-const getFurnitures = await fetchFurnitures(state);
+        // 2. Початковий стан - всі товари
+state.categoryId = '0',
+state.page = 1;  
+
+       // (опційно) дублююче підсвітимо "0", якщо css або розмітка змінилася
+const allLi = categoriesList.querySelector('[data-id="0"]');
+if(allLi) allLi.classList.add('active');
+
+       // 3. Товари для всіх категорій categoryId='0' => параметр category не підійде
+const getFurnitures = await fetchFurnitures({
+    page: state.page,
+    limit: state.limit,
+    categoryId: state.categoryId,
+});
 renderFurniture (getFurnitures);
 
 } catch(error) {
-    console.error(error)
+    iziToast.warning({
+        message: error,
+        position: "topCenter"
+    })
 }
 }
 
