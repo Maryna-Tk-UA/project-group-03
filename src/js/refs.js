@@ -1,5 +1,9 @@
-const categoriesList = document.querySelector(".categories-list");
-const furnitureList = document.querySelector(".furniture-list");
+ const els = {
+    categoriesList: document.querySelector(".categories-list"),
+    furnitureList: document.querySelector(".furniture-list"),
+    loadMoreBtn: document.querySelector("#load-more")
+}
+
 
 // Стан пагінації:
 const state = {
@@ -10,8 +14,8 @@ const state = {
                     // для розрахунку кількості сторінок і визначення коли товари закінчилися      
     totalPage: 0,       // скільки сторінок доступно (Math.ceil(totalItems / limit))
                     // для порівняння з page і знати, чи показувати кнопку "Завантажити ще"
-    totalLoaded: 0,
-    isLoading: false,    // прапорець, чи триває зараз завантаження
+    totalLoaded: 0,     // кількість вже завантажених товарів
+    isLoading: false,   // прапорець, чи триває зараз завантаження
                     // запобігає повторним запитам
     categories: [],      // ?
     categoryId: '0',     // за замовчуванням - Всі товари
@@ -19,4 +23,4 @@ const state = {
 }
 
 
-export { categoriesList, furnitureList, state };
+export { els, state };
